@@ -22,8 +22,8 @@ public class Telescopico extends SubsystemBase {
 
   public Telescopico() {
     TelescopicoLeftFrontMotor.setInverted(true);
-    TelescopicoLeftBackMotor.setInverted(true);
-
+    TelescopicoRightFrontMotor.setInverted(true);
+    
     TelescopicoLeftFrontMotor.follow(TelescopicoRightFrontMotor);
     TelescopicoLeftBackMotor.follow(TelescopicoRightFrontMotor);
     TelescopicoRightBackMotor.follow(TelescopicoRightFrontMotor);

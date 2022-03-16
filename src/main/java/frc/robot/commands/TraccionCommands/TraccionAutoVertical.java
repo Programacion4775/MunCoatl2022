@@ -34,7 +34,6 @@ private Traccion AuxTraccionAutoVertical;
     PositionFrontRightV = 0;
     PositionFrontLeftV = 0; 
     FlagVerticalTraccion = false;
-    AuxTraccionAutoVertical.EncodersReset();
     //AuxTraccionAutoVertical.PIDResetFrontRightTraccion();
     //AuxTraccionAutoVertical.PIDResetFrontLeftTraccion();
   }

@@ -12,6 +12,8 @@ public final class Constants {
   //Intake//
   public static final int IntakeFrontM = 5;
   public static final int IntakeBackM = 4; 
+  //UpBalls//
+  public static final int UpBallsM = 25; 
   //Shooter//
   public final static int Shooter = 2;
   //Parkour//

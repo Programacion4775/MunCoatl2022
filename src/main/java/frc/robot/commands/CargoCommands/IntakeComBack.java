@@ -11,9 +11,9 @@ public class IntakeComBack extends CommandBase {
 //Unir comando con el subsitema//
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private IntakeBack AuxIntakeBack;
-  public IntakeComBack(IntakeBack AIntakeBack, double AUpDOwnIntakeBack) {
+  public IntakeComBack(IntakeBack AIntakeBack, double AUpDownIntakeBack) {
     AuxIntakeBack = AIntakeBack;
-    UpDownIntakeBack = AUpDOwnIntakeBack;
+    UpDownIntakeBack = AUpDownIntakeBack;
     addRequirements(AuxIntakeBack);
   }
 

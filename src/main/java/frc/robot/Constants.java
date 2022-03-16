@@ -9,6 +9,9 @@ public final class Constants {
   public final static int TraccionBackRight = 30; 
   public final static int TraccionFrontLeft = 33; 
   public final static int TraccionFrontRight = 32; 
+  //Intake//
+  public static final int IntakeFrontM = 5;
+  public static final int IntakeBackM = 4; 
   //Shooter//
   public final static int Shooter = 2;
   //Parkour//

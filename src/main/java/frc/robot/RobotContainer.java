@@ -4,12 +4,16 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.CargoCommands.IntakeComBack;
+import frc.robot.commands.CargoCommands.IntakeComFront;
 import frc.robot.commands.Parkour.TelescopicoCom;
 import frc.robot.commands.ShooterCommands.ShooterComControl;
 import frc.robot.commands.ShooterCommands.ShooterComVels;
 import frc.robot.commands.TraccionCommands.TraccionAutoVertical;
 import frc.robot.commands.TraccionCommands.TraccionCom;
 import frc.robot.subsystems.Traccion;
+import frc.robot.subsystems.Cargo.IntakeBack;
+import frc.robot.subsystems.Cargo.IntakeFront;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Telescopico;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -32,6 +36,9 @@ public class RobotContainer {
   //Traccion//
   private final Traccion r_Traccion = new Traccion();
   private final TraccionCom r_TraccionCom = new TraccionCom(r_Traccion);
+  //Intake//
+  private final IntakeFront r_IntakeFront = new IntakeFront();
+  private final IntakeBack r_IntakeBack = new IntakeBack();
   //Shooter//
   private final Shooter r_Shooter = new Shooter();
   private final ShooterComControl r_ShooterComControl = new ShooterComControl(r_Shooter);
@@ -71,9 +78,14 @@ public class RobotContainer {
 
 //BUTTONS AND COMMANS ASIGNATION//
 //ASIGNACION DE BOTONES A COMANDOS// 
-    //Control 1//
-    BumperL_1.whenHeld(new ShooterComVels(r_Shooter, .21));          //Shooter velocity 1 - Velocidad 1 shooter//
-    BumperR_1.whenHeld(new ShooterComVels(r_Shooter, .21));       //Shooter velocity 2 - Velocidad 2 shooter//         
+
+  //Control 1//    
+  ButtonA_1.whenHeld(new IntakeComFront(r_IntakeFront, -1));
+  ButtonB_1.whenHeld(new IntakeComBack(r_IntakeBack, 1));
+  ButtonX_1.whenHeld(new IntakeComFront(r_IntakeFront, 1));
+  ButtonY_1.whenHeld(new IntakeComBack(r_IntakeBack, -1));
+  BumperL_1.whenHeld(new ShooterComVels(r_Shooter, .21));      //Shooter velocity 1 - Velocidad 1 shooter//
+  BumperR_1.whenHeld(new ShooterComVels(r_Shooter, .21));     //Shooter velocity 2 - Velocidad 2 shooter//         
 
     //Control 2//
 

@@ -1,5 +1,8 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -9,12 +12,13 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Traccion extends SubsystemBase {
-  private final CANSparkMax TraccionBackLeftMotor = new CANSparkMax(Constants.TraccionBackLeft, MotorType.kBrushless);
-  private final CANSparkMax TraccionBackRightMotor = new CANSparkMax(Constants.TraccionBackRight, MotorType.kBrushless);
-  private final CANSparkMax TraccionFrontLeftMotor = new CANSparkMax(Constants.TraccionFrontLeft, MotorType.kBrushless);
-  private final CANSparkMax TraccionFrontRightMotor = new CANSparkMax(Constants.TraccionFrontRight, MotorType.kBrushless);
-  private final RelativeEncoder TraccionBackLeftEncoder = TraccionBackLeftMotor.getEncoder();
-  private final RelativeEncoder TraccionBackRightEncoder = TraccionBackRightMotor.getEncoder();
+
+  //Actuators declaration//
+  //Declaracion de actuadores//
+  private final TalonFX TraccionBackLeftMotor = new TalonFX(Constants.TraccionBackLeft);
+  private final TalonFX TraccionBackRightMotor = new TalonFX(Constants.TraccionBackRight);
+  private final TalonFX TraccionFrontLeftMotor = new TalonFX(Constants.TraccionFrontLeft);
+  private final TalonFX TraccionFrontRightMotor = new TalonFX(Constants.TraccionFrontRight);
 
   //private PIDController PIDFrontRightTraccion = new PIDController(0.05, 0, 0);
   //private PIDController PIDFrontLeftTraccion = new PIDController(0.05, 0, 0);
@@ -22,6 +26,11 @@ public class Traccion extends SubsystemBase {
   public Traccion() {
     TraccionFrontLeftMotor.setInverted(true);
     TraccionBackLeftMotor.setInverted(true);
+
+    TraccionBackLeftMotor.setNeutralMode(NeutralMode.Brake);
+    TraccionBackRightMotor.setNeutralMode(NeutralMode.Brake);
+    TraccionFrontLeftMotor.setNeutralMode(NeutralMode.Brake);
+    TraccionFrontRightMotor.setNeutralMode(NeutralMode.Brake);
   }
 
   @Override
@@ -30,40 +39,36 @@ public class Traccion extends SubsystemBase {
   public void VelocityTraccion (double x,double y,double z){
     //Ajustar el eje del control//
     if(x<=.2 && x>=-.2 && y<=.2 && y>=-.2 && z<=.2 && z>=-.2){
-     TraccionFrontRightMotor.set(0);
-     TraccionFrontLeftMotor.set(0);
-     TraccionBackRightMotor.set(0);
-     TraccionBackLeftMotor.set(0);
+     TraccionFrontRightMotor.set(ControlMode.PercentOutput, 0);
+     TraccionFrontLeftMotor.set(ControlMode.PercentOutput, 0);
+     TraccionBackRightMotor.set(ControlMode.PercentOutput, 0);
+     TraccionBackLeftMotor.set(ControlMode.PercentOutput, 0);
     }
     else{
-    TraccionFrontRightMotor.set(y-x+z);
-    TraccionFrontLeftMotor.set(y+x-z);
-    TraccionBackRightMotor.set(y+x+z);
-    TraccionBackLeftMotor.set(y-x-z);
+    TraccionFrontRightMotor.set(ControlMode.PercentOutput, y-x+z);
+    TraccionFrontLeftMotor.set(ControlMode.PercentOutput, y+x-z);
+    TraccionBackRightMotor.set(ControlMode.PercentOutput, y+x+z);
+    TraccionBackLeftMotor.set(ControlMode.PercentOutput, y-x-z);
    }
   }
 
   public void diferentialVel(double vR, double vL){
-    TraccionFrontRightMotor.set(vR);
-    TraccionFrontLeftMotor.set(vL);
-    TraccionBackRightMotor.set(vR);
-    TraccionBackLeftMotor.set(vL);
+    TraccionFrontRightMotor.set(ControlMode.PercentOutput, vR);
+    TraccionFrontLeftMotor.set(ControlMode.PercentOutput, vL);
+    TraccionBackRightMotor.set(ControlMode.PercentOutput, vR);
+    TraccionBackLeftMotor.set(ControlMode.PercentOutput, vL);
   }
   public void LateralVelocity(double vR, double vL){
-    TraccionFrontRightMotor.set(vL);
-    TraccionFrontLeftMotor.set(vR);
-    TraccionBackRightMotor.set(vR);
-    TraccionBackLeftMotor.set(vL);
+    TraccionFrontRightMotor.set(ControlMode.PercentOutput, vL);
+    TraccionFrontLeftMotor.set(ControlMode.PercentOutput, vR);
+    TraccionBackRightMotor.set(ControlMode.PercentOutput, vR);
+    TraccionBackLeftMotor.set(ControlMode.PercentOutput, vL);
   }
   
   public double EncoderRightBackTraccion(){
-    return TraccionBackRightEncoder.getPosition();
+    return TraccionBackRightMotor.getSensorCollection().getIntegratedSensorPosition();
   }
   public double EncoderLeftBackTraccion(){
-    return TraccionBackLeftEncoder.getPosition();
-  }
-  public void EncodersReset(){
-    TraccionBackRightEncoder.setPosition(0);
-    TraccionBackLeftEncoder.setPosition(0);
+    return TraccionBackLeftMotor.getSensorCollection().getIntegratedSensorPosition();
   }
 }

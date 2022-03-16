@@ -2,20 +2,22 @@
 //LIBRERIAS//
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class Telescopico extends SubsystemBase {
 
   //Actuators declaration//
   //Declaracion de actuadores//
-  private final TalonFX TelescopicoRightBackMotor = new TalonFX(30);
-  private final TalonFX TelescopicoLeftBackMotor = new TalonFX(31);
-  private final TalonFX TelescopicoRightFrontMotor = new TalonFX(32);
-  private final TalonFX TelescopicoLeftFrontMotor = new TalonFX(33);
+  private final CANSparkMax TelescopicoRightBackMotor = new CANSparkMax(Constants.TelescopicoRightBack, MotorType.kBrushless);
+  private final CANSparkMax TelescopicoLeftBackMotor = new CANSparkMax(Constants.TelescopicoLeftBack, MotorType.kBrushless);
+  private final CANSparkMax TelescopicoRightFrontMotor = new CANSparkMax(Constants.TelescopicoRightFront, MotorType.kBrushless);
+  private final CANSparkMax TelescopicoLeftFrontMotor = new CANSparkMax(Constants.TelescopicoLeftFront, MotorType.kBrushless);
+  private final RelativeEncoder TelescopicoRightFrontEncoder = TelescopicoRightFrontMotor.getEncoder();
   //private PIDController PIDTelescopico = new PIDController(0.001, 0, 0);
 
   public Telescopico() {
@@ -25,12 +27,6 @@ public class Telescopico extends SubsystemBase {
     TelescopicoLeftFrontMotor.follow(TelescopicoRightFrontMotor);
     TelescopicoLeftBackMotor.follow(TelescopicoRightFrontMotor);
     TelescopicoRightBackMotor.follow(TelescopicoRightFrontMotor);
-
-    TelescopicoRightFrontMotor.setNeutralMode(NeutralMode.Brake);
-    TelescopicoRightBackMotor.setNeutralMode(NeutralMode.Brake);
-    TelescopicoLeftFrontMotor.setNeutralMode(NeutralMode.Brake);
-    TelescopicoLeftBackMotor.setNeutralMode(NeutralMode.Brake);
-
   }
 
   @Override
@@ -44,10 +40,10 @@ public class Telescopico extends SubsystemBase {
    //Motors velocity//
   //Velocidad de motores//
   public void VelocityTelescipicoS (double VTelescopico){
-    TelescopicoRightFrontMotor.set(ControlMode.PercentOutput, VTelescopico);
+    TelescopicoRightFrontMotor.set(VTelescopico);
   }
 
-  //Limit Switch//
+ /* //Limit Switch//
   public boolean LimitTelesopicoR(){
     boolean LimitPressedTelescopicoR = false;
     if(TelescopicoRightFrontMotor.isRevLimitSwitchClosed()==1){
@@ -64,12 +60,12 @@ public class Telescopico extends SubsystemBase {
         //RobotContainer.r_PistonsHook.OpenCloseHooks(false);
       }
     return LimitPressedTelescopicoL;
-  }
+  }*/
   
   //Encoder position value//
   //Valor de posicion del encoder//
   public double EncoderTelescopicoR() {
-    return TelescopicoRightFrontMotor.getSensorCollection().getIntegratedSensorPosition();
+    return TelescopicoRightFrontEncoder.getPosition();
   }
 
 

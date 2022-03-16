@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.CargoCommands.IntakeComBack;
 import frc.robot.commands.CargoCommands.IntakeComFront;
+import frc.robot.commands.CargoCommands.UpBallsAutoCom;
 import frc.robot.commands.CargoCommands.UpBallsCom;
 import frc.robot.commands.Parkour.TelescopicoCom;
 import frc.robot.commands.ShooterCommands.ShooterComControl;
@@ -20,6 +21,8 @@ import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Telescopico;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -100,8 +103,10 @@ public class RobotContainer {
 
 //COMANDOS DE DEFAULT//
 //DEFEAULT COMMANDS//
-    r_Telescopico.setDefaultCommand(r_TelescopicoCom);
-    r_Traccion.setDefaultCommand(r_TraccionCom);
+  r_Traccion.setDefaultCommand(r_TraccionCom);
+  r_UpBalls.setDefaultCommand(r_UpBallsCom);
+  r_Shooter.setDefaultCommand(r_ShooterComControl);
+  r_Telescopico.setDefaultCommand(r_TelescopicoCom);
   }
 
   /**
@@ -118,9 +123,15 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return 
-        new ParallelCommandGroup(new TraccionAutoVertical(r_Traccion, 50, 50),
+  return new ParallelCommandGroup( 
+    new ShooterComVels(r_Shooter, .21),
+    new SequentialCommandGroup(new WaitCommand(3)),
+      new IntakeComFront(r_IntakeFront, -1),
+      new UpBallsAutoCom(r_UpBalls, 1),
+      new SequentialCommandGroup(
+        new WaitCommand(5),
+        new ParallelDeadlineGroup(new TraccionAutoVertical(r_Traccion, 50, 50),
         new WaitCommand(1)
-    );
+        )));
   }
   }

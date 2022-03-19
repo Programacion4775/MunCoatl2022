@@ -11,6 +11,7 @@ import frc.robot.commands.CargoCommands.UpBallsCom;
 import frc.robot.commands.Parkour.TelescopicoCom;
 import frc.robot.commands.ShooterCommands.ShooterComControl;
 import frc.robot.commands.ShooterCommands.ShooterComVels;
+import frc.robot.commands.TraccionCommands.TraccionAutoHorizontal;
 import frc.robot.commands.TraccionCommands.TraccionAutoVertical;
 import frc.robot.commands.TraccionCommands.TraccionCom;
 import frc.robot.subsystems.Traccion;
@@ -126,7 +127,24 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-  return new ParallelCommandGroup( 
+    return
+     new ParallelCommandGroup(
+      new ShooterComVels(r_Shooter, .5),
+      new SequentialCommandGroup(
+        new WaitCommand(2),
+        new TraccionAutoVertical(r_Traccion, -2048, -2048),
+        new IntakeComBack(r_IntakeBack, 1),
+        new UpBallsAutoCom(r_UpBalls, 1),
+        new WaitCommand(2),
+        new TraccionAutoHorizontal(r_Traccion, 2048, -2048),
+        new TraccionAutoVertical(r_Traccion, -1000, -1000),
+        new IntakeComBack(r_IntakeBack, 1),
+        new UpBallsAutoCom(r_UpBalls, 1),
+        new WaitCommand(2),
+        new TraccionAutoVertical(r_Traccion, -900, 900)
+      )
+      )
+ /*return new ParallelCommandGroup( 
     new ShooterComVels(r_Shooter, .21),
     new SequentialCommandGroup(new WaitCommand(3)),
       new IntakeComFront(r_IntakeFront, -1),
@@ -136,5 +154,5 @@ public class RobotContainer {
         new ParallelDeadlineGroup(new TraccionAutoVertical(r_Traccion, 50, 50),
         new WaitCommand(1)
         )));
-  }
+  }*/
   }

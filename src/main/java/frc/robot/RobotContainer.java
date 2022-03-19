@@ -17,6 +17,7 @@ import frc.robot.subsystems.Traccion;
 import frc.robot.subsystems.Cargo.IntakeBack;
 import frc.robot.subsystems.Cargo.IntakeFront;
 import frc.robot.subsystems.Cargo.UpBalls;
+import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Telescopico;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -53,6 +54,8 @@ public class RobotContainer {
   //Telescopico//
   private final Telescopico r_Telescopico = new Telescopico();
   private final TelescopicoCom r_TelescopicoCom = new TelescopicoCom(r_Telescopico); 
+  //Limelight//
+  public static final Limelight r_Limelight = new Limelight();
 
 //DECLARACION DE CONTROLES//
   public static final XboxController Control0 = new XboxController(0);   //Control 0//

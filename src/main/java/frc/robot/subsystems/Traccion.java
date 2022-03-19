@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
+import edu.wpi.first.math.controller.PIDController;
 //import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -16,9 +17,7 @@ public class Traccion extends SubsystemBase {
   private final TalonFX TraccionBackRightMotor = new TalonFX(Constants.TraccionBackRight);
   private final TalonFX TraccionFrontLeftMotor = new TalonFX(Constants.TraccionFrontLeft);
   private final TalonFX TraccionFrontRightMotor = new TalonFX(Constants.TraccionFrontRight);
-
-  //private PIDController PIDFrontRightTraccion = new PIDController(0.05, 0, 0);
-  //private PIDController PIDFrontLeftTraccion = new PIDController(0.05, 0, 0);
+  private final PIDController TraccionLimelightPID = new PIDController(.02, 0, 0);
   
   public Traccion() {
     TraccionFrontLeftMotor.setInverted(true);
@@ -49,11 +48,11 @@ public class Traccion extends SubsystemBase {
    }
   }
 
-  public void diferentialVel(double vR, double vL){
-    TraccionFrontRightMotor.set(ControlMode.PercentOutput, vR);
-    TraccionFrontLeftMotor.set(ControlMode.PercentOutput, vL);
-    TraccionBackRightMotor.set(ControlMode.PercentOutput, vR);
-    TraccionBackLeftMotor.set(ControlMode.PercentOutput, vL);
+  public void diferentialVel(double vlR, double vlL){
+    TraccionFrontRightMotor.set(ControlMode.PercentOutput, vlR);
+    TraccionFrontLeftMotor.set(ControlMode.PercentOutput, vlL);
+    TraccionBackRightMotor.set(ControlMode.PercentOutput, vlR);
+    TraccionBackLeftMotor.set(ControlMode.PercentOutput, vlL);
   }
   public void LateralVelocity(double vR, double vL){
     TraccionFrontRightMotor.set(ControlMode.PercentOutput, vL);
@@ -61,11 +60,26 @@ public class Traccion extends SubsystemBase {
     TraccionBackRightMotor.set(ControlMode.PercentOutput, vR);
     TraccionBackLeftMotor.set(ControlMode.PercentOutput, vL);
   }
+  public void Follow (double fx){
+    TraccionFrontRightMotor.set(ControlMode.PercentOutput, fx);
+    TraccionFrontLeftMotor.set(ControlMode.PercentOutput, -fx);
+    TraccionBackRightMotor.set(ControlMode.PercentOutput, fx);
+    TraccionBackLeftMotor.set(ControlMode.PercentOutput, -fx);
+}
   
   public double EncoderRightBackTraccion(){
     return TraccionBackRightMotor.getSensorCollection().getIntegratedSensorPosition();
   }
   public double EncoderLeftBackTraccion(){
     return TraccionBackLeftMotor.getSensorCollection().getIntegratedSensorPosition();
+  }
+  public void PIDResetTraccionLimelight(){
+    TraccionLimelightPID.reset();
+  }
+  public void PIDCalculateOutputTraccionLimelight(double PIDSetPointTarget){
+    Follow(TraccionLimelightPID.calculate(0, PIDSetPointTarget));
+  }
+  public double PIDMotorOutputTraccionLimelight(double PIDSetPointTarget){
+    return TraccionLimelightPID.calculate(0,PIDSetPointTarget);
   }
 }

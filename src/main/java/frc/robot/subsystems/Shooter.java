@@ -29,8 +29,19 @@ public class Shooter extends SubsystemBase {
   public void PIDResetShooter(){
     PIDShooter.reset();
   }
-  public double PIDCalculateOutputShooter (double PIDCurrentPositionShooter, double PIDSetPointShooter){
-    double PIDOutputShooter = PIDShooter.calculate(PIDCurrentPositionShooter, PIDSetPointShooter);
+ /* public void PIDTolerance(double ShooterVelTolerance){
+    PIDShooter.setTolerance(0,ShooterVelTolerance);
+  }
+  public boolean PIDStop(){
+    return PIDShooter.atSetpoint();
+  }*/
+ /* public double VelocityError (double ShooterVelError){
+    ShooterVelError = PIDShooter.getVelocityError();
+    return ShooterVelError;
+  }*/
+  public double PIDCalculateOutputShooter (double PIDCurrentVelocityShooter, double PIDSetPointShooter){
+    double PIDOutputShooter = PIDShooter.calculate(PIDCurrentVelocityShooter, PIDSetPointShooter);
     return PIDOutputShooter;
   }
+  
 }

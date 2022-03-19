@@ -79,6 +79,3 @@ private Traccion AuxTraccionAutoHorizontal;
     return FlagHorizontalTraccion;
   }
 }
-
-
-

@@ -18,7 +18,6 @@ public class Telescopico extends SubsystemBase {
   private final CANSparkMax TelescopicoRightFrontMotor = new CANSparkMax(Constants.TelescopicoRightFront, MotorType.kBrushless);
   private final CANSparkMax TelescopicoLeftFrontMotor = new CANSparkMax(Constants.TelescopicoLeftFront, MotorType.kBrushless);
   private final RelativeEncoder TelescopicoRightFrontEncoder = TelescopicoRightFrontMotor.getEncoder();
-  //private PIDController PIDTelescopico = new PIDController(0.001, 0, 0);
 
   public Telescopico() {
     TelescopicoLeftFrontMotor.setInverted(true);
@@ -37,48 +36,15 @@ public class Telescopico extends SubsystemBase {
   public void simulationPeriodic() {
   }
 
-   //Motors velocity//
-  //Velocidad de motores//
-  public void VelocityTelescipicoS (double VTelescopico){
+//Motors velocity//
+//Velocidad de motores//
+  public void VelocityTelescopicos (double VTelescopico){
     TelescopicoRightFrontMotor.set(VTelescopico);
   }
-
- /* //Limit Switch//
-  public boolean LimitTelesopicoR(){
-    boolean LimitPressedTelescopicoR = false;
-    if(TelescopicoRightFrontMotor.isRevLimitSwitchClosed()==1){
-      LimitPressedTelescopicoR = true;
-      //RobotContainer.r_PistonsHook.OpenCloseHooks(false);
-    }
-    return LimitPressedTelescopicoR;
-  }
-
-    public boolean LimitTelesopicoL(){
-      boolean LimitPressedTelescopicoL = false;
-      if(TelescopicoLeftFrontMotor.isRevLimitSwitchClosed()==1){
-        LimitPressedTelescopicoL = true;
-        //RobotContainer.r_PistonsHook.OpenCloseHooks(false);
-      }
-    return LimitPressedTelescopicoL;
-  }*/
   
-  //Encoder position value//
-  //Valor de posicion del encoder//
+//Encoder position value//
+//Valor de posicion del encoder//
   public double EncoderTelescopicoR() {
     return TelescopicoRightFrontEncoder.getPosition();
-  }
-
-
-  
-  //PID values//
-  //Valores de PID//
-  /*
-  public void PIDResetTelescopico(){
-    PIDTelescopico.reset();
-  }
-  public double CalculateOutputTelescopico(double PIDCurrentPositionTelescopico, double PIDSetPointTelescopico){
-    double PIDOutputTelescopico = PIDTelescopico.calculate(PIDCurrentPositionTelescopico, PIDSetPointTelescopico);
-    return PIDOutputTelescopico;
-  }*/
-  
+  }  
 }

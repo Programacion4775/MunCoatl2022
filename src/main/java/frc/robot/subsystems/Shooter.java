@@ -32,9 +32,6 @@ public class Shooter extends SubsystemBase {
  /* public void PIDTolerance(double ShooterVelTolerance){
     PIDShooter.setTolerance(0,ShooterVelTolerance);
   }
-  public boolean PIDStop(){
-    return PIDShooter.atSetpoint();
-  }*/
  /* public double VelocityError (double ShooterVelError){
     ShooterVelError = PIDShooter.getVelocityError();
     return ShooterVelError;

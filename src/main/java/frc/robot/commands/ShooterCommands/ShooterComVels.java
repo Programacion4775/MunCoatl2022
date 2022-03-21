@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooter;
 
 public class ShooterComVels extends CommandBase {
+  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
 
 //Variables declaration//
 //Declaracion de variables//
@@ -16,7 +17,6 @@ public class ShooterComVels extends CommandBase {
 
 //Link command with subsistem//
 //Unir comando con el subsitema//
-@SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private Shooter AuxShooter;
   public ShooterComVels(Shooter AShooter, double AVelsShooter) {
     AuxShooter = AShooter;

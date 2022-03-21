@@ -1,11 +1,12 @@
 //LIBRARIES//
 //LIBRERIAS//
-package frc.robot.subsystems;
+package frc.robot.subsystems.Parkour;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -18,6 +19,7 @@ public class Telescopico extends SubsystemBase {
   private final CANSparkMax TelescopicoRightFrontMotor = new CANSparkMax(Constants.TelescopicoRightFront, MotorType.kBrushless);
   private final CANSparkMax TelescopicoLeftFrontMotor = new CANSparkMax(Constants.TelescopicoLeftFront, MotorType.kBrushless);
   private final RelativeEncoder TelescopicoRightFrontEncoder = TelescopicoRightFrontMotor.getEncoder();
+  private PIDController TelescopicoPID = new PIDController(0, 0, 0);
 
   public Telescopico() {
     TelescopicoLeftFrontMotor.setInverted(true);
@@ -36,15 +38,30 @@ public class Telescopico extends SubsystemBase {
   public void simulationPeriodic() {
   }
 
-//Motors velocity//
-//Velocidad de motores//
+//TELESCOPICO CONTROL//
+ //MOTOR//
+ //Motors velocity//
+ //Velocidad de motores//
   public void VelocityTelescopicos (double VTelescopico){
     TelescopicoRightFrontMotor.set(VTelescopico);
   }
-  
-//Encoder position value//
-//Valor de posicion del encoder//
+ //ENCODER//
+ //Encoder position value//
+ //Valor de posicion del encoder//
   public double EncoderTelescopicoR() {
     return TelescopicoRightFrontEncoder.getPosition();
   }  
+
+//TELESCOPICO AUTO//
+  //Reset PID value//
+  //Resetear el valor de PID//
+  public void PIDResetTelescopico(){
+    TelescopicoPID.reset();
+  }
+  //Calculate PID OutPut//
+  //Calcular la salida del PID//
+  public double PIDCalculateOutPutTelescopico (double PIDCurrentPositionTelescopico, double PIDSetPoint){
+    double PIDOutPutTelescopico = PIDCalculateOutPutTelescopico(PIDCurrentPositionTelescopico, PIDSetPoint);
+    return PIDOutPutTelescopico;
+  }
 }

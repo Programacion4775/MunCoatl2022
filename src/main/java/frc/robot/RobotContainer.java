@@ -8,7 +8,8 @@ import frc.robot.commands.CargoCommands.IntakeComBack;
 import frc.robot.commands.CargoCommands.IntakeComFront;
 import frc.robot.commands.CargoCommands.UpBallsAutoCom;
 import frc.robot.commands.CargoCommands.UpBallsCom;
-import frc.robot.commands.Parkour.TelescopicoCom;
+import frc.robot.commands.ParkourCom.TelescopicoCom;
+import frc.robot.commands.ParkourCom.TelescopicoPushCom;
 import frc.robot.commands.ShooterCommands.ShooterComControl;
 import frc.robot.commands.ShooterCommands.ShooterComVels;
 import frc.robot.commands.TraccionCommands.TraccionAutoVertical;
@@ -17,9 +18,10 @@ import frc.robot.subsystems.Traccion;
 import frc.robot.subsystems.Cargo.IntakeBack;
 import frc.robot.subsystems.Cargo.IntakeFront;
 import frc.robot.subsystems.Cargo.UpBalls;
+import frc.robot.subsystems.Parkour.Telescopico;
+import frc.robot.subsystems.Parkour.TelescopicoPush;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.Telescopico;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
@@ -39,9 +41,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 public class RobotContainer {
 
-  // COMMANDS AND SUBSYSTEMS DECLARATION//
-  // DECLARACION DE SUBSISTEMAS Y COMANDOS//
-
+// COMMANDS AND SUBSYSTEMS DECLARATION//
+// DECLARACION DE SUBSISTEMAS Y COMANDOS//
   // Traccion//
   private final Traccion r_Traccion = new Traccion();
   private final TraccionCom r_TraccionCom = new TraccionCom(r_Traccion);
@@ -57,20 +58,24 @@ public class RobotContainer {
   // Telescopico//
   private final Telescopico r_Telescopico = new Telescopico();
   private final TelescopicoCom r_TelescopicoCom = new TelescopicoCom(r_Telescopico);
+  // TelescopicoPush//
+  private final TelescopicoPush r_TelescopicoPush = new TelescopicoPush();
   // Limelight//
   public static final Limelight r_Limelight = new Limelight();
 
-  // DECLARACION DE CONTROLES//
+// DECLARACION DE CONTROLES//
   public static final XboxController Control0 = new XboxController(0); // Control 0//
   public static final XboxController Control1 = new XboxController(1); // Control 1//
   public static final XboxController Control2 = new XboxController(2); // Control 2//
 
-  // DECLARACION DE BOTONES//
+// DECLARACION DE BOTONES//
   // Control 0//
   public JoystickButton ButtonA_0 = new JoystickButton(Control0, 1);
   public JoystickButton ButtonB_0 = new JoystickButton(Control0, 2);
   public JoystickButton ButtonX_0 = new JoystickButton(Control0, 3);
   public JoystickButton ButtonY_0 = new JoystickButton(Control0, 4);
+  public JoystickButton BumperL_0 = new JoystickButton(Control0, 5);
+  public JoystickButton BumperR_0 = new JoystickButton(Control0, 6);
   // Control 1//
   public JoystickButton ButtonA_1 = new JoystickButton(Control1, 1);
   public JoystickButton ButtonB_1 = new JoystickButton(Control1, 2);
@@ -90,9 +95,11 @@ public class RobotContainer {
 
     configureButtonBindings();
 
-    // BUTTONS AND COMMANS ASIGNATION//
-    // ASIGNACION DE BOTONES A COMANDOS//
-
+  // BUTTONS AND COMMANS ASIGNATION//
+  // ASIGNACION DE BOTONES A COMANDOS//
+    // Control 0//
+    BumperR_0.whenHeld(new TelescopicoPushCom(r_TelescopicoPush, 1));
+    BumperL_0.whenHeld(new TelescopicoPushCom(r_TelescopicoPush, -1));
     // Control 1//
     ButtonA_1.whenHeld(new IntakeComFront(r_IntakeFront, -1));
     ButtonB_1.whenHeld(new IntakeComBack(r_IntakeBack, 1));

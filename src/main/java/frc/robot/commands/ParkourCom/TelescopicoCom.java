@@ -1,14 +1,14 @@
 //LIBRARIES//
 //LIBRERIAS//
-package frc.robot.commands.Parkour;
+package frc.robot.commands.ParkourCom;
 
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.Telescopico;
+import frc.robot.subsystems.Parkour.Telescopico;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class TelescopicoCom extends CommandBase {
-  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
+@SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
 
 //Link command with subsistem//
 //Unir comando con el subsitema//
@@ -24,8 +24,6 @@ public class TelescopicoCom extends CommandBase {
   @Override
   public void execute() {
     SmartDashboard.putNumber("Encoder Telescopico", AuxTelescopico.EncoderTelescopicoR());
- /*   SmartDashboard.putBoolean("TLimitR", AuxTelescopico.LimitTelesopicoR());
-    SmartDashboard.putBoolean("TLimitL", AuxTelescopico.LimitTelesopicoL());*/
     AuxTelescopico.VelocityTelescopicos(RobotContainer.Control0.getRightTriggerAxis()-RobotContainer.Control0.getLeftTriggerAxis());
   }
 

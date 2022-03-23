@@ -31,9 +31,9 @@ public class TelescopicoAutoCom extends CommandBase {
 
   @Override
   public void execute() {
-    PositionTelescopico = AuxTelescopicoAuto.EncoderTelescopicoR();
-    OutPutTelescopico = AuxTelescopicoAuto.PIDCalculateOutPutTelescopico(PositionTelescopico, SetPointTelescopico);
-    AuxTelescopicoAuto.VelocityTelescopicos(OutPutTelescopico);
+    PositionTelescopico = AuxTelescopicoAuto.EncoderTelescopicoR(); //Get Telescopico Current Position////Obtener la posición actual del Telescopico//
+    OutPutTelescopico = AuxTelescopicoAuto.PIDCalculateOutPutTelescopico(PositionTelescopico, SetPointTelescopico); //Calculate PID TelescopicoOutput//Clacular la salida PID del Telescopico//
+    AuxTelescopicoAuto.VelocityTelescopicos(OutPutTelescopico); //Give that output to the motors//Darle esa salida al telescopico//
     ErrorTelescopico = SetPointTelescopico -  PositionTelescopico; 
     if(Math.abs(ErrorTelescopico) <= 30){
       FlagTelescopicoAuto = true;
@@ -45,7 +45,6 @@ public class TelescopicoAutoCom extends CommandBase {
     AuxTelescopicoAuto.PIDResetTelescopico();
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return FlagTelescopicoAuto;

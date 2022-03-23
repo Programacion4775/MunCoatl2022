@@ -8,7 +8,9 @@ import frc.robot.commands.CargoCommands.IntakeComBack;
 import frc.robot.commands.CargoCommands.IntakeComFront;
 import frc.robot.commands.CargoCommands.UpBallsAutoCom;
 import frc.robot.commands.CargoCommands.UpBallsCom;
+import frc.robot.commands.ParkourCom.TelescopicoAutoCom;
 import frc.robot.commands.ParkourCom.TelescopicoCom;
+import frc.robot.commands.ParkourCom.TelescopicoPushAutoCom;
 import frc.robot.commands.ParkourCom.TelescopicoPushCom;
 import frc.robot.commands.ShooterCommands.ShooterComControl;
 import frc.robot.commands.ShooterCommands.ShooterComVels;
@@ -98,6 +100,11 @@ public class RobotContainer {
   // BUTTONS AND COMMANS ASIGNATION//
   // ASIGNACION DE BOTONES A COMANDOS//
     // Control 0//
+    ButtonA_0.whenPressed(
+      new SequentialCommandGroup(
+        new TelescopicoAutoCom(r_Telescopico, 200),
+        new TelescopicoPushAutoCom(r_TelescopicoPush, 200),
+        new TelescopicoAutoCom(r_Telescopico, 200)));
     BumperR_0.whenHeld(new TelescopicoPushCom(r_TelescopicoPush, 1));
     BumperL_0.whenHeld(new TelescopicoPushCom(r_TelescopicoPush, -1));
     // Control 1//
@@ -107,7 +114,6 @@ public class RobotContainer {
     ButtonY_1.whenHeld(new IntakeComBack(r_IntakeBack, -1));
     BumperL_1.whenHeld(new ShooterComVels(r_Shooter, .21)); // Shooter velocity 1 - Velocidad 1 shooter//
     BumperR_1.whenHeld(new ShooterComVels(r_Shooter, .21)); // Shooter velocity 2 - Velocidad 2 shooter//
-
     // Control 2//
 
     // COMANDOS DE DEFAULT//
@@ -136,28 +142,27 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     return Fwd();
-
   }
 
-  public Command Red (){
-      return
-        new SequentialCommandGroup(
+  public Command Red(){
+    return
+      new SequentialCommandGroup(
+        new WaitCommand(2),
+        new TraccionAutoVertical(r_Traccion, -128442, -128442),
+        new ParallelCommandGroup(
+          new ShooterComVels(r_Shooter, 1),       
+          new SequentialCommandGroup(
+           new WaitCommand(2),   
+           new ParallelDeadlineGroup(
+              new WaitCommand(7), 
+              new IntakeComBack(r_IntakeBack, 1), 
+              new UpBallsAutoCom(r_UpBalls, 1)))),
           new WaitCommand(2),
-          new TraccionAutoVertical(r_Traccion, -128442, -128442),
-          new ParallelCommandGroup(
-            new ShooterComVels(r_Shooter, 1),       
-            new SequentialCommandGroup(
-              new WaitCommand(2),   
-              new ParallelDeadlineGroup(
-                new WaitCommand(7), 
-                new IntakeComBack(r_IntakeBack, 1), 
-                new UpBallsAutoCom(r_UpBalls, 1))),
-          new WaitCommand(2),
-          new TraccionAutoVertical(r_Traccion, 13975, -13975),//2969
+          new TraccionAutoVertical(r_Traccion, 13975, -13975),
           new WaitCommand(2),
           new TraccionAutoVertical(r_Traccion, 138077, 138077),
           new ParallelDeadlineGroup(
-            new WaitCommand(7), 
+            new WaitCommand(5), 
             new IntakeComBack(r_IntakeBack, 1), 
             new UpBallsAutoCom(r_UpBalls, 1)),
           new TraccionAutoVertical(r_Traccion, -56355, 56355),//900
@@ -169,7 +174,7 @@ public class RobotContainer {
               new WaitCommand(2),   
               new ParallelDeadlineGroup(
                 new WaitCommand(7), 
-                new UpBallsAutoCom(r_UpBalls, 1))))));
+                new UpBallsAutoCom(r_UpBalls, 1)))));
     }
 
   public Command Fwd() {

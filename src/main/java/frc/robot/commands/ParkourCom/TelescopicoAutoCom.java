@@ -20,6 +20,7 @@ public class TelescopicoAutoCom extends CommandBase {
   public TelescopicoAutoCom(Telescopico ATelescopicoAuto, double ASetPointTelescopico){
     AuxTelescopicoAuto = ATelescopicoAuto; 
     SetPointTelescopico = ASetPointTelescopico;
+    addRequirements(AuxTelescopicoAuto);
   }
 
   @Override

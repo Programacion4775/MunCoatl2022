@@ -47,12 +47,6 @@ private Traccion AuxTraccionAutoVertical;
     SmartDashboard.putBoolean("flagtraccion", FlagVerticalTraccion);*/
     PositionFrontRightV = AuxTraccionAutoVertical.EncoderRightBackTraccion();
     PositionFrontLeftV = AuxTraccionAutoVertical.EncoderLeftBackTraccion();
-    /*rPIDOut = AuxTraccionAutoVertical.PIDCalculateOutputFrontRightTraccion(PositionFrontRightV, SetPointVerticalRightTraccion);
-    lPIDOut = AuxTraccionAutoVertical.PIDCalculateOutputFrontLeftTraccion(PositionFrontLeftV, SetPointVerticalLeftTraccion);
-    if (Math.abs(SetPointVerticalRightTraccion - PositionFrontRightV ) <= 5 && (Math.abs(SetPointVerticalRightTraccion - PositionFrontLeftV) <= 5)){
-      FlagVerticalTraccion = true;
-      } 
-    AuxTraccionAutoVertical.diferentialVel(rPIDOut, lPIDOut);*/
     if (Math.abs(SetPointVerticalRightTraccion) - Math.abs(PositionFrontRightV) <= 5 && (Math.abs(SetPointVerticalRightTraccion) - Math.abs(PositionFrontLeftV) <= 5)){
       FlagVerticalTraccion = true;
       } 

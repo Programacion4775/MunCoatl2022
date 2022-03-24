@@ -12,7 +12,7 @@ import edu.wpi.first.math.controller.PIDController;
 public class Shooter extends SubsystemBase {
   private final CANSparkMax ShooterMotor = new CANSparkMax(Constants.Shooter,MotorType.kBrushless);
   private final RelativeEncoder ShooterEncoder = ShooterMotor.getEncoder();
-  private PIDController PIDShooter = new PIDController(0.001, 0, 0);
+  //private PIDController PIDShooter = new PIDController(0.002, 0, 0);
 
   public Shooter() {}
 
@@ -26,12 +26,12 @@ public class Shooter extends SubsystemBase {
   public double VelocityEncoderShooter(){
     return ShooterEncoder.getVelocity();
   }
-  public void PIDResetShooter(){
+ /* public void PIDResetShooter(){
     PIDShooter.reset();
   }
   public double PIDCalculateOutputShooter (double PIDCurrentVelocityShooter, double PIDSetPointShooter){
     double PIDOutputShooter = PIDShooter.calculate(PIDCurrentVelocityShooter, PIDSetPointShooter);
     return PIDOutputShooter;
-  }
+  }*/
   
 }

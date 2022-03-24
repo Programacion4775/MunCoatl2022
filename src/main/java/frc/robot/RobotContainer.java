@@ -8,14 +8,15 @@ import frc.robot.commands.CargoCommands.IntakeComBack;
 import frc.robot.commands.CargoCommands.IntakeComFront;
 import frc.robot.commands.CargoCommands.UpBallsAutoCom;
 import frc.robot.commands.CargoCommands.UpBallsCom;
-import frc.robot.commands.ParkourCom.TelescopicoAutoCom;
+//import frc.robot.commands.ParkourCom.TelescopicoAutoCom;
 import frc.robot.commands.ParkourCom.TelescopicoCom;
-import frc.robot.commands.ParkourCom.TelescopicoPushAutoCom;
+//import frc.robot.commands.ParkourCom.TelescopicoPushAutoCom;
 import frc.robot.commands.ParkourCom.TelescopicoPushCom;
 import frc.robot.commands.ShooterCommands.ShooterComControl;
 import frc.robot.commands.ShooterCommands.ShooterComVels;
 import frc.robot.commands.TraccionCommands.TraccionAutoVertical;
 import frc.robot.commands.TraccionCommands.TraccionCom;
+import frc.robot.commands.TraccionCommands.TraccionLimelightCom;
 import frc.robot.subsystems.Traccion;
 import frc.robot.subsystems.Cargo.IntakeBack;
 import frc.robot.subsystems.Cargo.IntakeFront;
@@ -48,6 +49,7 @@ public class RobotContainer {
   // Traccion//
   private final Traccion r_Traccion = new Traccion();
   private final TraccionCom r_TraccionCom = new TraccionCom(r_Traccion);
+  private final TraccionLimelightCom r_TraccionLimelightCom = new TraccionLimelightCom (r_Traccion);
   // Intake//
   private final IntakeFront r_IntakeFront = new IntakeFront();
   private final IntakeBack r_IntakeBack = new IntakeBack();
@@ -100,20 +102,23 @@ public class RobotContainer {
   // BUTTONS AND COMMANS ASIGNATION//
   // ASIGNACION DE BOTONES A COMANDOS//
     // Control 0//
-    ButtonA_0.whenPressed(
+/*  ButtonA_0.whenPressed(
       new SequentialCommandGroup(
         new TelescopicoAutoCom(r_Telescopico, 200),
         new TelescopicoPushAutoCom(r_TelescopicoPush, 200),
-        new TelescopicoAutoCom(r_Telescopico, 200)));
-    BumperR_0.whenHeld(new TelescopicoPushCom(r_TelescopicoPush, 1));
-    BumperL_0.whenHeld(new TelescopicoPushCom(r_TelescopicoPush, -1));
+        new TelescopicoAutoCom(r_Telescopico, 200)));*/
+    ButtonB_0.toggleWhenActive(r_TraccionLimelightCom);
+    BumperR_0.whenHeld(new TelescopicoPushCom(r_TelescopicoPush, 1, -1));
+    BumperL_0.whenHeld(new TelescopicoPushCom(r_TelescopicoPush, -1, 1));
+    BumperR_0.whenReleased(new TelescopicoPushCom(r_TelescopicoPush, 0, 0));
+    BumperL_0.whenReleased(new TelescopicoPushCom(r_TelescopicoPush, 0, 0));
     // Control 1//
     ButtonA_1.whenHeld(new IntakeComFront(r_IntakeFront, -1));
     ButtonB_1.whenHeld(new IntakeComBack(r_IntakeBack, 1));
     ButtonX_1.whenHeld(new IntakeComFront(r_IntakeFront, 1));
     ButtonY_1.whenHeld(new IntakeComBack(r_IntakeBack, -1));
-    BumperL_1.whenHeld(new ShooterComVels(r_Shooter, .21)); // Shooter velocity 1 - Velocidad 1 shooter//
-    BumperR_1.whenHeld(new ShooterComVels(r_Shooter, .21)); // Shooter velocity 2 - Velocidad 2 shooter//
+    BumperL_1.toggleWhenActive(new ShooterComVels(r_Shooter, .25)); // Shooter velocity 1 - Velocidad 1 shooter//
+    BumperR_1.toggleWhenActive(new ShooterComVels(r_Shooter, .21)); // Shooter velocity 2 - Velocidad 2 shooter//
     // Control 2//
 
     // COMANDOS DE DEFAULT//

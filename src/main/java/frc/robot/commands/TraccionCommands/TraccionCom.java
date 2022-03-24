@@ -23,7 +23,7 @@ public class TraccionCom extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    AuxTraccion.VelocityTraccion(RobotContainer.Control0.getLeftX(), RobotContainer.Control0.getLeftY(), RobotContainer.Control0.getRightX());
+    AuxTraccion.VelocityTraccion(RobotContainer.Control0.getLeftX(), -RobotContainer.Control0.getLeftY(), RobotContainer.Control0.getRightX());
   }
 
   // Called once the command ends or is interrupted.

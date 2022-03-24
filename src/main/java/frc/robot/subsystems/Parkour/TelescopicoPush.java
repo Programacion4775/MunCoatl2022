@@ -16,7 +16,6 @@ public class TelescopicoPush extends SubsystemBase {
 
   public TelescopicoPush() {
     TelescopicoPushLeftMotor.setInverted(true);
-    TelescopicoPushLeftMotor.follow(TelescopicoPushRightMotor);
   }
 
   @Override
@@ -27,8 +26,11 @@ public class TelescopicoPush extends SubsystemBase {
  //MOTOR//
  //Motors velocity//
  //Velocidad de motores//
-  public void VelocityTelescopicoPush(double VTelescopicoPush){
-    TelescopicoPushRightMotor.set(VTelescopicoPush);
+  public void VelocityTelescopicoPushR(double VTelescopicoPushR){
+    TelescopicoPushRightMotor.set(VTelescopicoPushR);
+  }
+  public void VelocityTelescopicoPushL(double VTelescopicoPushL){
+    TelescopicoPushLeftMotor.set(VTelescopicoPushL);
   }
 //ENCODER//
  //Encoder position value//

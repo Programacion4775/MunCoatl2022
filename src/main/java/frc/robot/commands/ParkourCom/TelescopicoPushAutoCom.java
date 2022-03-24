@@ -31,9 +31,10 @@ public class TelescopicoPushAutoCom extends CommandBase {
 
   @Override
   public void execute() {
-    PositionTelescopicoPush = AuxTelescopicoPushAuto.EncoderTelescopicoPush();
-    OutPutTelescopicoPush = AuxTelescopicoPushAuto.PIDCalculateOutPutTelescopicoPush(PositionTelescopicoPush, SetPointTelescopicoPush);
-    AuxTelescopicoPushAuto.VelocityTelescopicoPush(OutPutTelescopicoPush);
+    PositionTelescopicoPush = AuxTelescopicoPushAuto.EncoderTelescopicoPush(); //Get Telescopico Current Position////Obtener la posición actual del Telescopico//
+    OutPutTelescopicoPush = AuxTelescopicoPushAuto.PIDCalculateOutPutTelescopicoPush(PositionTelescopicoPush, SetPointTelescopicoPush); //Calculate PID TelescopicoOutput//Clacular la salida PID del Telescopico//
+    AuxTelescopicoPushAuto.VelocityTelescopicoPushR(OutPutTelescopicoPush); //Give that output to the motors//Darle esa salida al telescopico//
+    AuxTelescopicoPushAuto.VelocityTelescopicoPushL(OutPutTelescopicoPush); 
     ErrorTelescopicoPush = SetPointTelescopicoPush - PositionTelescopicoPush;
     if (Math.abs(ErrorTelescopicoPush)<=30){
       FlagTelescopicoPushAuto = true;

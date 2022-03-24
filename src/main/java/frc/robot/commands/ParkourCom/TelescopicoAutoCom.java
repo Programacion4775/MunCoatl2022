@@ -18,8 +18,8 @@ public class TelescopicoAutoCom extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Telescopico AuxTelescopicoAuto;
   public TelescopicoAutoCom(Telescopico ATelescopicoAuto, double ASetPointTelescopico){
-    AuxTelescopicoAuto = ATelescopicoAuto; 
     SetPointTelescopico = ASetPointTelescopico;
+    AuxTelescopicoAuto = ATelescopicoAuto; 
     addRequirements(AuxTelescopicoAuto);
   }
 
@@ -33,7 +33,10 @@ public class TelescopicoAutoCom extends CommandBase {
   public void execute() {
     PositionTelescopico = AuxTelescopicoAuto.EncoderTelescopicoR(); //Get Telescopico Current Position////Obtener la posición actual del Telescopico//
     OutPutTelescopico = AuxTelescopicoAuto.PIDCalculateOutPutTelescopico(PositionTelescopico, SetPointTelescopico); //Calculate PID TelescopicoOutput//Clacular la salida PID del Telescopico//
-    AuxTelescopicoAuto.VelocityTelescopicos(OutPutTelescopico); //Give that output to the motors//Darle esa salida al telescopico//
+    AuxTelescopicoAuto.VelocityTelescopicosRF(OutPutTelescopico); //Give that output to the motors//Darle esa salida al telescopico//
+    AuxTelescopicoAuto.VelocityTelescopicosLF(OutPutTelescopico); 
+    AuxTelescopicoAuto.VelocityTelescopicosRB(OutPutTelescopico); 
+    AuxTelescopicoAuto.VelocityTelescopicosLB(OutPutTelescopico); 
     ErrorTelescopico = SetPointTelescopico -  PositionTelescopico; 
     if(Math.abs(ErrorTelescopico) <= 30){
       FlagTelescopicoAuto = true;

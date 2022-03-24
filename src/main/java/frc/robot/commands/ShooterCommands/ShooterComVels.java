@@ -10,7 +10,6 @@ public class ShooterComVels extends CommandBase {
 //Variables declaration//
 //Declaracion de variables//
   double VelsShooter = 0;
-  double SetPointShooter = 0;
   double VelocityShooter = 0;
   double PIDOutShooter = 0; 
   boolean FlagShooter = false;
@@ -27,18 +26,19 @@ public class ShooterComVels extends CommandBase {
   @Override
   public void initialize() {
     FlagShooter = false;
-    AuxShooter.PIDResetShooter();
+    //AuxShooter.PIDResetShooter();
   }
 
   @Override
   public void execute() {
     SmartDashboard.putBoolean("ShooterAct", true);
-    VelocityShooter = AuxShooter.VelocityEncoderShooter();
+    SmartDashboard.putNumber("encoder shoot", AuxShooter.VelocityEncoderShooter());
+    AuxShooter.VelocityShooter(VelsShooter);
+    /*VelocityShooter = AuxShooter.VelocityEncoderShooter();
     PIDOutShooter = AuxShooter.PIDCalculateOutputShooter(VelocityShooter, VelsShooter);
-    AuxShooter.VelocityShooter(PIDOutShooter);
-    if (Math.abs(SetPointShooter - VelocityShooter ) <= 15){
+    if (Math.abs(VelsShooter - VelocityShooter ) <= 15){
       FlagShooter = true;
-      }
+      }*/
   }
 
   @Override
@@ -50,6 +50,6 @@ public class ShooterComVels extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return false;
+    return FlagShooter;
   }
 }

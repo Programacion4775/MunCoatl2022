@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Cargo.IntakeBack;
 
 public class IntakeComBack extends CommandBase {
-    
   double UpDownIntakeBack = 0;
 
 //Link command with subsistem//

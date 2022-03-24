@@ -3,15 +3,17 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Parkour.TelescopicoPush;
 
 public class TelescopicoPushCom extends CommandBase {
-  double AuxUpDownTelescopico = 0;
-  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
+  double AuxUpDownTelescopicoR = 0;
+  double AuxUpDownTelescopicoL = 0; 
 
   //Link command with subsistem//
   //Unir comando con el subsitema//
+  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final TelescopicoPush AuxTelescopicoPush;
-  public TelescopicoPushCom(TelescopicoPush ATelescopicoPush, double AUpDownTelescopico) {
+  public TelescopicoPushCom(TelescopicoPush ATelescopicoPush, double AUpDownTelescopicoR, double AUpDownTelescopicoL) {
     AuxTelescopicoPush = ATelescopicoPush;
-    AuxUpDownTelescopico = AUpDownTelescopico;
+    AuxUpDownTelescopicoR = AUpDownTelescopicoR;
+    AuxUpDownTelescopicoL = AUpDownTelescopicoL;
     addRequirements(AuxTelescopicoPush);
   }
 
@@ -20,7 +22,8 @@ public class TelescopicoPushCom extends CommandBase {
 
   @Override
   public void execute() {
-    AuxTelescopicoPush.VelocityTelescopicoPush(AuxUpDownTelescopico);
+    AuxTelescopicoPush.VelocityTelescopicoPushR(AuxUpDownTelescopicoR);
+    AuxTelescopicoPush.VelocityTelescopicoPushL(AuxUpDownTelescopicoL);
   }
 
   @Override

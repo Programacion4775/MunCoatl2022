@@ -4,17 +4,16 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Cargo.IntakeFront;
 
 public class IntakeComFront extends CommandBase {
-
   double UpDownIntakeFront = 0;
 
 //Link command with subsistem//
 //Unir comando con el subsitema//
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private IntakeFront AuxIntakeIn;
-  public IntakeComFront(IntakeFront AIntake, double AUpDownIntakeFront) {
-  AuxIntakeIn = AIntake;
+  private IntakeFront AuxIntakeFront;
+  public IntakeComFront(IntakeFront AIntakeFront, double AUpDownIntakeFront) {
+  AuxIntakeFront = AIntakeFront;
   UpDownIntakeFront = AUpDownIntakeFront;
-  addRequirements(AuxIntakeIn);
+  addRequirements(AuxIntakeFront);
   }
 
   @Override
@@ -22,12 +21,12 @@ public class IntakeComFront extends CommandBase {
 
   @Override
   public void execute() {
-    AuxIntakeIn.VelocityIntakeFront(UpDownIntakeFront);
+    AuxIntakeFront.VelocityIntakeFront(UpDownIntakeFront);
   }
 
   @Override
   public void end(boolean interrupted) {
-    AuxIntakeIn.VelocityIntakeFront(0);
+    AuxIntakeFront.VelocityIntakeFront(0);
   }
 
   @Override

@@ -22,12 +22,10 @@ public class Telescopico extends SubsystemBase {
   private PIDController TelescopicoPID = new PIDController(0, 0, 0);
 
   public Telescopico() {
+    TelescopicoRightFrontMotor.setInverted(false);
+    TelescopicoRightBackMotor.setInverted(false);
     TelescopicoLeftFrontMotor.setInverted(true);
-    TelescopicoRightFrontMotor.setInverted(true);
-    
-    TelescopicoLeftFrontMotor.follow(TelescopicoRightFrontMotor);
-    TelescopicoLeftBackMotor.follow(TelescopicoRightFrontMotor);
-    TelescopicoRightBackMotor.follow(TelescopicoRightFrontMotor);
+    TelescopicoLeftBackMotor.setInverted(true);
   }
 
   @Override
@@ -42,8 +40,17 @@ public class Telescopico extends SubsystemBase {
  //MOTOR//
  //Motors velocity//
  //Velocidad de motores//
-  public void VelocityTelescopicos (double VTelescopico){
-    TelescopicoRightFrontMotor.set(VTelescopico);
+  public void VelocityTelescopicosRF(double VTelescopicoRF){
+    TelescopicoRightFrontMotor.set(VTelescopicoRF);
+  }
+  public void VelocityTelescopicosRB(double VTelescopicoRB){
+    TelescopicoRightBackMotor.set(VTelescopicoRB);
+  }
+  public void VelocityTelescopicosLF(double VTelescopicoLF){
+    TelescopicoLeftFrontMotor.set(VTelescopicoLF);
+  }
+  public void VelocityTelescopicosLB(double VTelescopicoLB){
+    TelescopicoRightBackMotor.set(VTelescopicoLB);
   }
  //ENCODER//
  //Encoder position value//

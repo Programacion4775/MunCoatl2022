@@ -16,7 +16,7 @@ public class UpBallsCom extends CommandBase {
 
   @Override
   public void execute() {
-    AuxUpBalls.VelocityUpBalls(-RobotContainer.Control1.getLeftY());
+    AuxUpBalls.VelocityUpBalls(RobotContainer.Control1.getLeftY());
   }
 
   @Override

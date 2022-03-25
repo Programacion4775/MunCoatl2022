@@ -25,9 +25,9 @@ public class UpBIntakeCom extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double eje = RobotContainer.Control0.getLeftY();
-    AuxIntakeB.VelocityIntakeBack(eje);
-    AuxIntakeF.VelocityIntakeFront(eje);
+    double eje = RobotContainer.Control1.getLeftY();
+    AuxIntakeB.VelocityIntakeBack(-eje);
+    AuxIntakeF.VelocityIntakeFront(-eje);
     AuxUpB.VelocityUpBalls(eje);
   }
 

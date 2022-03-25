@@ -120,8 +120,8 @@ public class RobotContainer {
     ButtonB_1.whenHeld(new IntakeComBack(r_IntakeBack, 1));
     ButtonX_1.whenHeld(new IntakeComFront(r_IntakeFront, -1));
     ButtonY_1.whenHeld(new IntakeComBack(r_IntakeBack, -1));
-    BumperL_1.toggleWhenActive(new ShooterComVels(r_Shooter, .3)); // Shooter velocity 1 - Velocidad 1 shooter//
-    BumperR_1.toggleWhenActive(new ShooterComVels(r_Shooter, .5)); // Shooter velocity 2 - Velocidad 2 shooter//
+    BumperL_1.toggleWhenActive(new ShooterComVels(r_Shooter, .18)); // Shooter velocity 1 - Velocidad 1 shooter//
+    BumperR_1.toggleWhenActive(new ShooterComVels(r_Shooter, .4)); // Shooter velocity 2 - Velocidad 2 shooter//
     // Control 2//
 
     // COMANDOS DE DEFAULT//
@@ -150,7 +150,7 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return Fwd();
+    return MTY();
   }
 
   public Command Red(){
@@ -220,21 +220,34 @@ public class RobotContainer {
   
 
   public Command Fwd() {
-    return new TraccionAutoVertical(r_Traccion, 45812, 45812);
+    return new TraccionAutoVertical(r_Traccion, -60000, -60000);
   }
 
   public Command LowerHUB() {
     return new ParallelCommandGroup( 
       new ShooterComVels(r_Shooter, .25),//.22 abajo decirle a brau probar con burros mty
-      new SequentialCommandGroup(new WaitCommand(3)),
-      new IntakeComFront(r_IntakeFront, -1),
-      new UpBallsAutoCom(r_UpBalls, 1),
       new SequentialCommandGroup(
         new WaitCommand(5),
-        new ParallelDeadlineGroup(new TraccionAutoVertical(r_Traccion, 45812*2.5, 45812*2.5),//casi 3 vueltas de llanta, si pasa x, si no subir 
-        new WaitCommand(1)
-        )
-    )
-    );
+        new IntakeComFront(r_IntakeFront, 1),
+        new UpBallsAutoCom(r_UpBalls, -1),
+        new TraccionAutoVertical(r_Traccion, 45812*2.5, 45812*2.5),//casi 3 vueltas de llanta, si pasa x, si no subir 
+        new WaitCommand(1)));
+  }
+
+    public Command MTY() {
+      return new ParallelCommandGroup( 
+        new ShooterComVels(r_Shooter, .63),
+        new SequentialCommandGroup(
+          new WaitCommand(3)),
+          new IntakeComFront(r_IntakeFront, 1),
+          new IntakeComBack(r_IntakeBack, 1),
+          new UpBallsAutoCom(r_UpBalls, -1),
+        new SequentialCommandGroup(
+          new WaitCommand(2),
+          new ParallelDeadlineGroup(new TraccionAutoVertical(r_Traccion, -45812*2.5, -45812*2.5),
+          new WaitCommand(1)
+          )
+      )
+      );
   }
 }

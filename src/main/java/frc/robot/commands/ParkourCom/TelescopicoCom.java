@@ -42,7 +42,7 @@ public class TelescopicoCom extends CommandBase {
     AuxTelescopico.VelocityTelescopicosLF(AuxTelescopicoFL); 
     AuxTelescopico.VelocityTelescopicosRB(AuxTelescopicoBR); 
     AuxTelescopico.VelocityTelescopicosLB(AuxTelescopicoBL); */
-    AuxTelescopico.VelocityTelescopico(RobotContainer.Control0.getRightTriggerAxis()-RobotContainer.Control0.getLeftTriggerAxis());
+    AuxTelescopico.VelocityTelescopico(RobotContainer.Control0.getRightTriggerAxis()*0.5-RobotContainer.Control0.getLeftTriggerAxis());
   }
 
   @Override

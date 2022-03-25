@@ -1,4 +1,4 @@
-package frc.robot.commands.ParkourCom;
+/*package frc.robot.commands.ParkourCom;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Parkour.TelescopicoPush;
@@ -49,3 +49,4 @@ public class TelescopicoPushAutoCom extends CommandBase {
     return FlagTelescopicoPushAuto;
   }
 }
+*/

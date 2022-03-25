@@ -51,18 +51,19 @@ private Traccion AuxTraccionAutoVertical;
       FlagVerticalTraccion = true;
       } 
         if (SetPointVerticalLeftTraccion>0) {
-            lPIDOut = .25;
+            lPIDOut = .15;
         }
         if(SetPointVerticalLeftTraccion<0){        
-          lPIDOut = -.25;
+          lPIDOut = -.15;
         }
         if(SetPointVerticalRightTraccion<0){        
-          rPIDOut = -.25;
+          rPIDOut = -.15;
         }
         if(SetPointVerticalRightTraccion>0){        
-          rPIDOut = .25;
+          rPIDOut = .15;
         }
         AuxTraccionAutoVertical.diferentialVel(rPIDOut, lPIDOut);
+        //subir a .25
   }
 
   @Override

@@ -20,9 +20,8 @@ public class Traccion extends SubsystemBase {
   private final PIDController TraccionLimelightPID = new PIDController(.02, 0, 0);
   
   public Traccion() {
-    TraccionFrontLeftMotor.setInverted(true);
     TraccionBackLeftMotor.setInverted(true);
-
+    TraccionFrontLeftMotor.setInverted(true);
     TraccionBackLeftMotor.setNeutralMode(NeutralMode.Brake);
     TraccionBackRightMotor.setNeutralMode(NeutralMode.Brake);
     TraccionFrontLeftMotor.setNeutralMode(NeutralMode.Brake);
@@ -41,9 +40,9 @@ public class Traccion extends SubsystemBase {
      TraccionBackLeftMotor.set(ControlMode.PercentOutput, 0);
     }
     else{
-    TraccionFrontRightMotor.set(ControlMode.PercentOutput, y-x+z);
+    TraccionFrontRightMotor.set(ControlMode.PercentOutput, y+x+z);
     TraccionFrontLeftMotor.set(ControlMode.PercentOutput, y+x-z);
-    TraccionBackRightMotor.set(ControlMode.PercentOutput, y+x+z);
+    TraccionBackRightMotor.set(ControlMode.PercentOutput, y-x+z);
     TraccionBackLeftMotor.set(ControlMode.PercentOutput, y-x-z);
    }
   }

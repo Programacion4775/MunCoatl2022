@@ -19,13 +19,17 @@ public class Telescopico extends SubsystemBase {
   private final CANSparkMax TelescopicoRightFrontMotor = new CANSparkMax(Constants.TelescopicoRightFront, MotorType.kBrushless);
   private final CANSparkMax TelescopicoLeftFrontMotor = new CANSparkMax(Constants.TelescopicoLeftFront, MotorType.kBrushless);
   private final RelativeEncoder TelescopicoRightFrontEncoder = TelescopicoRightFrontMotor.getEncoder();
-  private PIDController TelescopicoPID = new PIDController(0, 0, 0);
+  private PIDController TelescopicoPID = new PIDController(0.05, 0, 0);
 
   public Telescopico() {
-    TelescopicoRightFrontMotor.setInverted(false);
+    /*TelescopicoRightFrontMotor.setInverted(false);
     TelescopicoRightBackMotor.setInverted(false);
     TelescopicoLeftFrontMotor.setInverted(true);
-    TelescopicoLeftBackMotor.setInverted(true);
+    TelescopicoLeftBackMotor.setInverted(true);*/
+    TelescopicoLeftFrontMotor.follow(TelescopicoRightFrontMotor, true);
+    TelescopicoRightBackMotor.follow(TelescopicoRightFrontMotor, false);
+    TelescopicoLeftBackMotor.follow(TelescopicoRightFrontMotor, true);
+    //derecho e izquierdo invertido uno//
   }
 
   @Override
@@ -40,7 +44,7 @@ public class Telescopico extends SubsystemBase {
  //MOTOR//
  //Motors velocity//
  //Velocidad de motores//
-  public void VelocityTelescopicosRF(double VTelescopicoRF){
+  /*public void VelocityTelescopicosRF(double VTelescopicoRF){
     TelescopicoRightFrontMotor.set(VTelescopicoRF);
   }
   public void VelocityTelescopicosRB(double VTelescopicoRB){
@@ -51,6 +55,9 @@ public class Telescopico extends SubsystemBase {
   }
   public void VelocityTelescopicosLB(double VTelescopicoLB){
     TelescopicoRightBackMotor.set(VTelescopicoLB);
+  }*/
+  public void VelocityTelescopico(double VTlescopico){
+    TelescopicoRightFrontMotor.set(VTlescopico);
   }
  //ENCODER//
  //Encoder position value//

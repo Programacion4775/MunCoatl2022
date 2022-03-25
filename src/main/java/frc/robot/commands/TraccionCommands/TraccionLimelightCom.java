@@ -10,6 +10,7 @@ public class TraccionLimelightCom extends CommandBase {
 //Variables declaration//
 //Declaracion de variables//
   double LimelightError = 0; 
+  boolean LimelightFlag = false;
 
 //Link command with subsistem//
 //Unir comando con el subsitema//
@@ -23,6 +24,7 @@ public class TraccionLimelightCom extends CommandBase {
   @Override
   public void initialize() {
     AuxTraccionLimelight.PIDResetTraccionLimelight();
+    LimelightFlag = false;
   }
 
   @Override
@@ -35,6 +37,7 @@ public class TraccionLimelightCom extends CommandBase {
     SmartDashboard.putNumber("tv", RobotContainer.r_Limelight.GetTV());
     if (RobotContainer.r_Limelight.GetTV() == 0){
       AuxTraccionLimelight.Follow(0);
+      LimelightFlag = true; 
     }
   }
 
@@ -43,6 +46,6 @@ public class TraccionLimelightCom extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return false;
+    return LimelightFlag;
   }
 }

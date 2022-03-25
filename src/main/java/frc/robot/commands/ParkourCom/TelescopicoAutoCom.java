@@ -1,4 +1,4 @@
-package frc.robot.commands.ParkourCom;
+/*package frc.robot.commands.ParkourCom;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Parkour.Telescopico;
@@ -38,7 +38,7 @@ public class TelescopicoAutoCom extends CommandBase {
     AuxTelescopicoAuto.VelocityTelescopicosRB(OutPutTelescopico); 
     AuxTelescopicoAuto.VelocityTelescopicosLB(OutPutTelescopico); 
     ErrorTelescopico = SetPointTelescopico -  PositionTelescopico; 
-    if(Math.abs(ErrorTelescopico) <= 30){
+    if(Math.abs(ErrorTelescopico) <= 5){
       FlagTelescopicoAuto = true;
     }
   }
@@ -53,3 +53,4 @@ public class TelescopicoAutoCom extends CommandBase {
     return FlagTelescopicoAuto;
   }
 }
+*/

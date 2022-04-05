@@ -185,39 +185,6 @@ public class RobotContainer {
                 new WaitCommand(5), 
                 new UpBallsAutoCom(r_UpBalls, 1)))));
     }
- /*public Command Blue(){
-    return
-      new SequentialCommandGroup(
-        new WaitCommand(2),
-        new TraccionAutoVertical(r_Traccion, -128442, -128442),
-        new ParallelCommandGroup(
-          new ShooterComVels(r_Shooter, 1),       
-          new SequentialCommandGroup(
-            new WaitCommand(2),   
-            new ParallelDeadlineGroup(
-              new WaitCommand(5), 
-              new IntakeComBack(r_IntakeBack, 1), 
-              new UpBallsAutoCom(r_UpBalls, 1)))),
-          new WaitCommand(2),
-          new TraccionAutoVertical(r_Traccion, 13975, -13975),
-          new WaitCommand(2),
-          new TraccionAutoVertical(r_Traccion, 138077, 138077),
-          new ParallelDeadlineGroup(
-            new WaitCommand(5), 
-            new IntakeComBack(r_IntakeBack, 1), 
-            new UpBallsAutoCom(r_UpBalls, 1)),
-          new TraccionAutoVertical(r_Traccion, -56355, 56355),//900
-          new TraccionAutoVertical(r_Traccion, -247447, -247447),
-          new TraccionAutoVertical(r_Traccion, 247447, 247447),
-          new ParallelCommandGroup(
-            new ShooterComVels(r_Shooter, 1),       
-            new SequentialCommandGroup(
-              new WaitCommand(2),   
-              new ParallelDeadlineGroup(
-                new WaitCommand(5), 
-                new UpBallsAutoCom(r_UpBalls, 1)))));
-      }*/
-  
 
   public Command Fwd() {
     return new TraccionAutoVertical(r_Traccion, -60000, -60000);
@@ -243,7 +210,7 @@ public class RobotContainer {
           new IntakeComBack(r_IntakeBack, 1),
           new UpBallsAutoCom(r_UpBalls, -1),
         new SequentialCommandGroup(
-          new WaitCommand(2),
+          new WaitCommand(6),
           new ParallelDeadlineGroup(new TraccionAutoVertical(r_Traccion, -45812*2.5, -45812*2.5),
           new WaitCommand(1)
           )

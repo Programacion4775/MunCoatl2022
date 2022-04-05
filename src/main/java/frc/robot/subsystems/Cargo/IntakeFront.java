@@ -20,4 +20,3 @@ public class IntakeFront extends SubsystemBase {
     IntakeFrontMotor.set(VIntakeFront);
   }
   }
-

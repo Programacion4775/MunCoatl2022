@@ -21,7 +21,6 @@ public final class Constants {
   public final static int TelescopicoLeftBack = 1;
   public final static int TelescopicoRightFront = 13;
   public final static int TelescopicoLeftFront = 7;
-  // TelescopicoPush//
-  public final static int TelescopicoPushRight = 14;
-  public final static int TelescopicoPushLeft = 15;
+  // Pistons// 
+  public final static int PistonT = 1; 
 }

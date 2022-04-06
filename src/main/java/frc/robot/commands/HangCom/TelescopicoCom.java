@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class TelescopicoCom extends CommandBase {
 
-  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
 //Link command with subsistem//
 //Unir comando con el subsitema//
   private final Telescopico AuxTelescopico;
@@ -23,7 +22,10 @@ public class TelescopicoCom extends CommandBase {
 
   @Override
   public void execute() {
-    SmartDashboard.putNumber("Encoder Telescopico", AuxTelescopico.EncoderTelescopicoR()); //Send to dashboard encoder value//Mandar el valor de encoder a la Dashboard//
+    //Dashboard Data//
+   //Valores en la Dashboard//
+    SmartDashboard.putNumber("Encoder Telescopico", AuxTelescopico.EncoderTelescopicoR()); //Encoder//
+    SmartDashboard.putBoolean("TelescopicoPressed", AuxTelescopico.LimitSwitchTelescopicoRight()); //Limit Switch//
     AuxTelescopico.VelocityTelescopico(RobotContainer.Control0.getRightTriggerAxis()*0.5-RobotContainer.Control0.getLeftTriggerAxis());
   }
 

@@ -7,6 +7,8 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.CargoCommands.IntakeCom;
 import frc.robot.commands.CargoCommands.UpBIntakeCom;
 import frc.robot.commands.CargoCommands.UpBallsAutoCom;
+import frc.robot.commands.HangCom.PistonCom;
+import frc.robot.commands.HangCom.TelescopicoAutoCom;
 import frc.robot.commands.HangCom.TelescopicoCom;
 //import frc.robot.commands.ParkourCom.TelescopicoPushAutoCom;
 import frc.robot.commands.ShooterCommands.ShooterComControl;
@@ -17,6 +19,7 @@ import frc.robot.commands.TraccionCommands.TraccionLimelightCom;
 import frc.robot.subsystems.Traccion;
 import frc.robot.subsystems.Cargo.Intake;
 import frc.robot.subsystems.Cargo.UpBalls;
+import frc.robot.subsystems.Hang.Piston;
 import frc.robot.subsystems.Hang.Telescopico;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
@@ -49,7 +52,6 @@ public class RobotContainer {
   public static Intake r_IntakeFront = new Intake();
   // UpBalls//
   private final UpBalls r_UpBalls = new UpBalls();
-  //private final UpBallsCom r_UpBallsCom = new UpBallsCom(r_UpBalls);
   private final UpBIntakeCom r_UpBIntakeCom = new UpBIntakeCom( r_IntakeFront, r_UpBalls);
   // Shooter//
   private final Shooter r_Shooter = new Shooter();
@@ -57,6 +59,8 @@ public class RobotContainer {
   // Telescopico//
   private final Telescopico r_Telescopico = new Telescopico();
   private final TelescopicoCom r_TelescopicoCom = new TelescopicoCom(r_Telescopico);
+  // Piston//
+  private final Piston r_Piston = new Piston(); 
   // Limelight//
   public static final Limelight r_Limelight = new Limelight();
 
@@ -95,11 +99,11 @@ public class RobotContainer {
   // BUTTONS AND COMMANS ASIGNATION//
   // ASIGNACION DE BOTONES A COMANDOS//
     // Control 0//
-    //ButtonY_0.whenPressed(
-      //new SequentialCommandGroup(
-        //new TelescopicoAutoCom(r_Telescopico, 45));
-        /*new TelescopicoPushAutoCom(r_TelescopicoPush, 200),
-        new TelescopicoAutoCom(r_Telescopico, 200)));*/
+    ButtonY_0.whenPressed(
+      new SequentialCommandGroup(
+        new TelescopicoAutoCom(r_Telescopico, 10),
+        new PistonCom(r_Piston, false),
+        n));
     ButtonX_0.toggleWhenActive(r_TraccionLimelightCom);
     // Control 1//
     ButtonA_1.whenHeld(new IntakeCom(r_IntakeFront, 1));
@@ -134,7 +138,7 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return MTY();
+    return ShootTaxi();
   }
 
   public Command Red(){
@@ -170,22 +174,7 @@ public class RobotContainer {
                 new UpBallsAutoCom(r_UpBalls, 1)))));
     }
 
-  public Command Fwd() {
-    return new TraccionAutoVertical(r_Traccion, -60000, -60000);
-  }
-
-  public Command LowerHUB() {
-    return new ParallelCommandGroup( 
-      new ShooterComVels(r_Shooter, .25),//.22 abajo decirle a brau probar con burros mty
-      new SequentialCommandGroup(
-        new WaitCommand(5),
-        new IntakeCom(r_IntakeFront, 1),
-        new UpBallsAutoCom(r_UpBalls, -1),
-        new TraccionAutoVertical(r_Traccion, 45812*2.5, 45812*2.5),//casi 3 vueltas de llanta, si pasa x, si no subir 
-        new WaitCommand(1)));
-  }
-
-    public Command MTY() {
+    public Command ShootTaxi() {
       return new ParallelCommandGroup( 
         new ShooterComVels(r_Shooter, .63),
         new SequentialCommandGroup(

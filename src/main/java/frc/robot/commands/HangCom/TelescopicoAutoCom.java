@@ -1,8 +1,7 @@
 package frc.robot.commands.HangCom;
-/*package frc.robot.commands.ParkourCom;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Parkour.Telescopico;
+import frc.robot.subsystems.Hang.Telescopico;
 
 public class TelescopicoAutoCom extends CommandBase {
 
@@ -34,10 +33,7 @@ public class TelescopicoAutoCom extends CommandBase {
   public void execute() {
     PositionTelescopico = AuxTelescopicoAuto.EncoderTelescopicoR(); //Get Telescopico Current Position////Obtener la posición actual del Telescopico//
     OutPutTelescopico = AuxTelescopicoAuto.PIDCalculateOutPutTelescopico(PositionTelescopico, SetPointTelescopico); //Calculate PID TelescopicoOutput//Clacular la salida PID del Telescopico//
-    AuxTelescopicoAuto.VelocityTelescopicosRF(OutPutTelescopico); //Give that output to the motors//Darle esa salida al telescopico//
-    AuxTelescopicoAuto.VelocityTelescopicosLF(OutPutTelescopico); 
-    AuxTelescopicoAuto.VelocityTelescopicosRB(OutPutTelescopico); 
-    AuxTelescopicoAuto.VelocityTelescopicosLB(OutPutTelescopico); 
+    AuxTelescopicoAuto.VelocityTelescopico(OutPutTelescopico); //Give that output to the motors//Darle esa salida al telescopico//
     ErrorTelescopico = SetPointTelescopico -  PositionTelescopico; 
     if(Math.abs(ErrorTelescopico) <= 5){
       FlagTelescopicoAuto = true;
@@ -54,4 +50,3 @@ public class TelescopicoAutoCom extends CommandBase {
     return FlagTelescopicoAuto;
   }
 }
-*/

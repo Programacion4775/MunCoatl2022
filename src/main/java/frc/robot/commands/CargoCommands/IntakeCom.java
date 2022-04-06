@@ -1,16 +1,16 @@
 package frc.robot.commands.CargoCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Cargo.IntakeFront;
+import frc.robot.subsystems.Cargo.Intake;
 
-public class IntakeComFront extends CommandBase {
+public class IntakeCom extends CommandBase {
   double UpDownIntakeFront = 0;
 
 //Link command with subsistem//
 //Unir comando con el subsitema//
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private IntakeFront AuxIntakeFront;
-  public IntakeComFront(IntakeFront AIntakeFront, double AUpDownIntakeFront) {
+  private Intake AuxIntakeFront;
+  public IntakeCom(Intake AIntakeFront, double AUpDownIntakeFront) {
   AuxIntakeFront = AIntakeFront;
   UpDownIntakeFront = AUpDownIntakeFront;
   addRequirements(AuxIntakeFront);

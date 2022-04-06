@@ -3,16 +3,13 @@ package frc.robot.commands.CargoCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.Cargo.IntakeBack;
-import frc.robot.subsystems.Cargo.IntakeFront;
+import frc.robot.subsystems.Cargo.Intake;
 import frc.robot.subsystems.Cargo.UpBalls;
 
 public class UpBIntakeCom extends CommandBase {
-  private IntakeBack AuxIntakeB;
-  private IntakeFront AuxIntakeF;
+  private Intake AuxIntakeF;
   private UpBalls AuxUpB;
-  public UpBIntakeCom(IntakeBack AIB, IntakeFront AIF, UpBalls AUP) {
-    AuxIntakeB = AIB;
+  public UpBIntakeCom(Intake AIF, UpBalls AUP) {
     AuxIntakeF = AIF;
     AuxUpB = AUP;
     addRequirements(AuxUpB);
@@ -26,7 +23,6 @@ public class UpBIntakeCom extends CommandBase {
   @Override
   public void execute() {
     double eje = RobotContainer.Control1.getLeftY();
-    AuxIntakeB.VelocityIntakeBack(-eje);
     AuxIntakeF.VelocityIntakeFront(-eje);
     AuxUpB.VelocityUpBalls(eje);
   }

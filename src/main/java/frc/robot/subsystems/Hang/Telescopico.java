@@ -1,6 +1,6 @@
 //LIBRARIES//
 //LIBRERIAS//
-package frc.robot.subsystems.Parkour;
+package frc.robot.subsystems.Hang;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;

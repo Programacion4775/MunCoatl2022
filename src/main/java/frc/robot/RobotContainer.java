@@ -4,27 +4,20 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.CargoCommands.IntakeComBack;
-import frc.robot.commands.CargoCommands.IntakeComFront;
+import frc.robot.commands.CargoCommands.IntakeCom;
 import frc.robot.commands.CargoCommands.UpBIntakeCom;
 import frc.robot.commands.CargoCommands.UpBallsAutoCom;
-import frc.robot.commands.CargoCommands.UpBallsCom;
-//import frc.robot.commands.ParkourCom.TelescopicoAutoCom;
-//import frc.robot.commands.ParkourCom.TelescopicoAutoCom;
-import frc.robot.commands.ParkourCom.TelescopicoCom;
+import frc.robot.commands.HangCom.TelescopicoCom;
 //import frc.robot.commands.ParkourCom.TelescopicoPushAutoCom;
-import frc.robot.commands.ParkourCom.TelescopicoPushCom;
 import frc.robot.commands.ShooterCommands.ShooterComControl;
 import frc.robot.commands.ShooterCommands.ShooterComVels;
 import frc.robot.commands.TraccionCommands.TraccionAutoVertical;
 import frc.robot.commands.TraccionCommands.TraccionCom;
 import frc.robot.commands.TraccionCommands.TraccionLimelightCom;
 import frc.robot.subsystems.Traccion;
-import frc.robot.subsystems.Cargo.IntakeBack;
-import frc.robot.subsystems.Cargo.IntakeFront;
+import frc.robot.subsystems.Cargo.Intake;
 import frc.robot.subsystems.Cargo.UpBalls;
-import frc.robot.subsystems.Parkour.Telescopico;
-import frc.robot.subsystems.Parkour.TelescopicoPush;
+import frc.robot.subsystems.Hang.Telescopico;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -53,20 +46,17 @@ public class RobotContainer {
   private final TraccionCom r_TraccionCom = new TraccionCom(r_Traccion);
   private final TraccionLimelightCom r_TraccionLimelightCom = new TraccionLimelightCom (r_Traccion);
   // Intake//
-  public static IntakeFront r_IntakeFront = new IntakeFront();
-  public static IntakeBack r_IntakeBack = new IntakeBack();
+  public static Intake r_IntakeFront = new Intake();
   // UpBalls//
   private final UpBalls r_UpBalls = new UpBalls();
   //private final UpBallsCom r_UpBallsCom = new UpBallsCom(r_UpBalls);
-  private final UpBIntakeCom r_UpBIntakeCom = new UpBIntakeCom(r_IntakeBack, r_IntakeFront, r_UpBalls);
+  private final UpBIntakeCom r_UpBIntakeCom = new UpBIntakeCom( r_IntakeFront, r_UpBalls);
   // Shooter//
   private final Shooter r_Shooter = new Shooter();
   private final ShooterComControl r_ShooterComControl = new ShooterComControl(r_Shooter);
   // Telescopico//
   private final Telescopico r_Telescopico = new Telescopico();
   private final TelescopicoCom r_TelescopicoCom = new TelescopicoCom(r_Telescopico);
-  // TelescopicoPush//
-  private final TelescopicoPush r_TelescopicoPush = new TelescopicoPush();
   // Limelight//
   public static final Limelight r_Limelight = new Limelight();
 
@@ -111,15 +101,9 @@ public class RobotContainer {
         /*new TelescopicoPushAutoCom(r_TelescopicoPush, 200),
         new TelescopicoAutoCom(r_Telescopico, 200)));*/
     ButtonX_0.toggleWhenActive(r_TraccionLimelightCom);
-    BumperR_0.whenHeld(new TelescopicoPushCom(r_TelescopicoPush, -1));
-    BumperL_0.whenHeld(new TelescopicoPushCom(r_TelescopicoPush, 1));
-    BumperR_0.whenReleased(new TelescopicoPushCom(r_TelescopicoPush, 0));
-    BumperL_0.whenReleased(new TelescopicoPushCom(r_TelescopicoPush, 0));
     // Control 1//
-    ButtonA_1.whenHeld(new IntakeComFront(r_IntakeFront, 1));
-    ButtonB_1.whenHeld(new IntakeComBack(r_IntakeBack, 1));
-    ButtonX_1.whenHeld(new IntakeComFront(r_IntakeFront, -1));
-    ButtonY_1.whenHeld(new IntakeComBack(r_IntakeBack, -1));
+    ButtonA_1.whenHeld(new IntakeCom(r_IntakeFront, 1));
+    ButtonX_1.whenHeld(new IntakeCom(r_IntakeFront, -1));
     BumperL_1.toggleWhenActive(new ShooterComVels(r_Shooter, .18)); // Shooter velocity 1 - Velocidad 1 shooter//
     BumperR_1.toggleWhenActive(new ShooterComVels(r_Shooter, .4)); // Shooter velocity 2 - Velocidad 2 shooter//
     // Control 2//
@@ -164,7 +148,7 @@ public class RobotContainer {
            new WaitCommand(2),   
            new ParallelDeadlineGroup(
               new WaitCommand(5), 
-              new IntakeComBack(r_IntakeBack, 1), 
+              new IntakeCom(r_IntakeFront, 1), 
               new UpBallsAutoCom(r_UpBalls, 1)))),
           new WaitCommand(2),
           new TraccionAutoVertical(r_Traccion, 13975, -13975),
@@ -172,7 +156,7 @@ public class RobotContainer {
           new TraccionAutoVertical(r_Traccion, 138077, 138077),
           new ParallelDeadlineGroup(
             new WaitCommand(5), 
-            new IntakeComBack(r_IntakeBack, 1), 
+            new IntakeCom(r_IntakeFront, 1), 
             new UpBallsAutoCom(r_UpBalls, 1)),
           new TraccionAutoVertical(r_Traccion, -56355, 56355),//900
           new TraccionAutoVertical(r_Traccion, -247447, -247447),
@@ -195,7 +179,7 @@ public class RobotContainer {
       new ShooterComVels(r_Shooter, .25),//.22 abajo decirle a brau probar con burros mty
       new SequentialCommandGroup(
         new WaitCommand(5),
-        new IntakeComFront(r_IntakeFront, 1),
+        new IntakeCom(r_IntakeFront, 1),
         new UpBallsAutoCom(r_UpBalls, -1),
         new TraccionAutoVertical(r_Traccion, 45812*2.5, 45812*2.5),//casi 3 vueltas de llanta, si pasa x, si no subir 
         new WaitCommand(1)));
@@ -206,8 +190,8 @@ public class RobotContainer {
         new ShooterComVels(r_Shooter, .63),
         new SequentialCommandGroup(
           new WaitCommand(3)),
-          new IntakeComFront(r_IntakeFront, 1),
-          new IntakeComBack(r_IntakeBack, 1),
+          new IntakeCom(r_IntakeFront, 1),
+          new IntakeCom(r_IntakeFront, 1),
           new UpBallsAutoCom(r_UpBalls, -1),
         new SequentialCommandGroup(
           new WaitCommand(6),

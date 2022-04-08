@@ -26,7 +26,7 @@ public class ShooterComVels extends CommandBase {
   @Override
   public void initialize() {
     FlagShooter = false;
-    //AuxShooter.PIDResetShooter();
+    AuxShooter.PIDResetShooter();
   }
 
   @Override
@@ -34,11 +34,11 @@ public class ShooterComVels extends CommandBase {
     SmartDashboard.putBoolean("ShooterAct", true);
     SmartDashboard.putNumber("encoder shoot", AuxShooter.VelocityEncoderShooter());
     AuxShooter.VelocityShooter(VelsShooter);
-    /*VelocityShooter = AuxShooter.VelocityEncoderShooter();
+    VelocityShooter = AuxShooter.VelocityEncoderShooter();
     PIDOutShooter = AuxShooter.PIDCalculateOutputShooter(VelocityShooter, VelsShooter);
     if (Math.abs(VelsShooter - VelocityShooter ) <= 15){
       FlagShooter = true;
-      }*/
+      }
   }
 
   @Override

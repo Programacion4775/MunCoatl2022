@@ -4,12 +4,15 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Cargo.UpBalls;
 
 public class UpBallsAutoCom extends CommandBase {
-  private UpBalls AuxUpBalls;
-  double Up = 0;
-  public UpBallsAutoCom(UpBalls AUpBalls, double AUp) {
-    AuxUpBalls = AUpBalls;
-    Up = AUp;
-    addRequirements(AuxUpBalls);
+  
+//Variables declaration//
+//Declaracion de variables//
+double VelsUpBalls = 0; 
+  private UpBalls AuxUpBallsAutoCom; 
+  public UpBallsAutoCom(UpBalls AUpBallS, double AVelsUpBalls) {
+    AuxUpBallsAutoCom = AUpBallS; 
+    VelsUpBalls = AVelsUpBalls; 
+    addRequirements(AuxUpBallsAutoCom);
   }
 
   @Override
@@ -17,11 +20,13 @@ public class UpBallsAutoCom extends CommandBase {
 
   @Override
   public void execute() {
-    AuxUpBalls.VelocityUpBalls(Up);
+    AuxUpBallsAutoCom.VelocityUpBalls(VelsUpBalls);
   }
 
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    AuxUpBallsAutoCom.VelocityUpBalls(0);
+  }
 
   @Override
   public boolean isFinished() {

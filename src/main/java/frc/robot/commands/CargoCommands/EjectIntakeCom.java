@@ -5,9 +5,17 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Cargo.EjectIntake;
 
 public class EjectIntakeCom extends CommandBase {
+  
+//Variables declaration//
+//Declaracion de variables//
+double ERIntake = 0; 
+
+//Link command with subsistem//
+//Unir comando con el subsitema//
   private EjectIntake AuxEjectIntake;
-  public EjectIntakeCom(EjectIntake aEjectIntake){
-    AuxEjectIntake = aEjectIntake;
+  public EjectIntakeCom(EjectIntake AEjectIntake, double AERIntake){
+    AuxEjectIntake = AEjectIntake;
+    ERIntake = AERIntake; 
     addRequirements(AuxEjectIntake);
   }
 
@@ -15,10 +23,14 @@ public class EjectIntakeCom extends CommandBase {
   public void initialize() {}
 
   @Override
-  public void execute() {}
+  public void execute() {
+    AuxEjectIntake.EjectReturnIntake(ERIntake);
+  }
 
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    AuxEjectIntake.EjectReturnIntake(0);
+  }
 
   @Override
   public boolean isFinished() {

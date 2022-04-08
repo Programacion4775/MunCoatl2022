@@ -2,12 +2,14 @@ package frc.robot.subsystems.Cargo;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class UpBalls extends SubsystemBase {
-  private final VictorSPX UpBallsMotor = new VictorSPX(Constants.UpBallsM);
+  private final CANSparkMax UpBallsMotor = new CANSparkMax(Constants.UpBallsRM, MotorType.kBrushless);
   
   public UpBalls() {}
 
@@ -17,10 +19,10 @@ public class UpBalls extends SubsystemBase {
 
   public void VelocityUpBalls (double Up){
     if(Up<=.2 && Up>=-.2){
-      UpBallsMotor.set(ControlMode.PercentOutput, 0);
+      UpBallsMotor.set(0);
     }
     else{
-      UpBallsMotor.set(ControlMode.PercentOutput, Up);
+      UpBallsMotor.set(Up);
     }
   }
 }

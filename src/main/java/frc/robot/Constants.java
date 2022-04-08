@@ -10,10 +10,13 @@ public final class Constants {
   public final static int TraccionFrontLeft = 33;
   public final static int TraccionFrontRight = 32;
   // Intake//
-  public static final int IntakeFrontM = 6;
-  public static final int IntakeBackM = 4;
+  public static final int Intake = 6;
+  public static final int EjectIntakeMotor = 12;
+  //PullBalls//
+  public static final int PullBallsM = 11; 
   // UpBalls//
-  public static final int UpBallsM = 25;
+  public static final int UpBallsRM = 25;
+  public static final int UpBallsLM = 27; 
   // Shooter//
   public final static int Shooter = 2;
   // Telescopico//

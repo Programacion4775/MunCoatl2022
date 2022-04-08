@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
-  private final VictorSPX IntakeFrontMotor = new VictorSPX(Constants.IntakeFrontM);
+  private final VictorSPX IntakeFrontMotor = new VictorSPX(Constants.Intake);
   public Intake() {}
 
   @Override

@@ -51,6 +51,11 @@ public class Telescopico extends SubsystemBase {
   public double EncoderTelescopicoR() {
     return TelescopicoRightFrontEncoder.getPosition();
   }  
+  //Reset Encoder Value//
+ //Resetear valor del Encoder//
+  public void ResetEncoderTelescopicoR(){
+    TelescopicoRightFrontEncoder.setPosition(0);
+  }
   //Limit Switch//
   public boolean LimitSwitchTelescopicoRight(){
     return TelescopicoRightLimit.isPressed();

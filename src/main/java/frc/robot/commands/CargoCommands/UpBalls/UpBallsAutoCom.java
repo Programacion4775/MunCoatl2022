@@ -1,4 +1,4 @@
-package frc.robot.commands.CargoCommands;
+package frc.robot.commands.CargoCommands.UpBalls;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Cargo.UpBalls;

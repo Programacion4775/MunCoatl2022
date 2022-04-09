@@ -1,5 +1,7 @@
 package frc.robot;
 
+import edu.wpi.first.wpilibj.I2C;
+
 public final class Constants {
 
   // ID´s MOTORS ASIGNATION//
@@ -17,6 +19,9 @@ public final class Constants {
   // UpBalls//
   public static final int UpBallsRM = 25;
   public static final int UpBallsLM = 27; 
+  //Sensor//
+  public static final I2C.Port PBCargoSensor = I2C.Port.kOnboard;
+  public static final I2C.Port UBCargoSensor = I2C.Port.kMXP;
   // Shooter//
   public final static int Shooter = 2;
   // Telescopico//

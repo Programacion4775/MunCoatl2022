@@ -1,6 +1,6 @@
 //LIBRARIES//
 //LIBRERIAS//
-package frc.robot.commands.HangCom;
+package frc.robot.commands.HangCom.TelescopicoCommands;
 
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Hang.Telescopico;

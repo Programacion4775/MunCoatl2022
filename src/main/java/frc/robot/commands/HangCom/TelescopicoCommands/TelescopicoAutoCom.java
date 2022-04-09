@@ -1,4 +1,4 @@
-package frc.robot.commands.HangCom;
+package frc.robot.commands.HangCom.TelescopicoCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Hang.Telescopico;

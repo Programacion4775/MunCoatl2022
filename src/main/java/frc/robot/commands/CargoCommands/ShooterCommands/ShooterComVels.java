@@ -1,8 +1,8 @@
-package frc.robot.commands.ShooterCommands;
+package frc.robot.commands.CargoCommands.ShooterCommands;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Cargo.Shooter;
 
 public class ShooterComVels extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})

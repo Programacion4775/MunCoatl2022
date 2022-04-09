@@ -1,5 +1,5 @@
 
-package frc.robot.commands.CargoCommands;
+package frc.robot.commands.CargoCommands.IntakeCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Cargo.EjectIntake;
@@ -20,7 +20,9 @@ double ERIntake = 0;
   }
 
   @Override
-  public void initialize() {}
+  public void initialize() {
+    AuxEjectIntake.ResetEncoderEjectInatke();
+  }
 
   @Override
   public void execute() {

@@ -20,4 +20,7 @@ public class PullBalls extends SubsystemBase {
   public void VelocityPullBalls(double Pull){
     PullBallsMotor.set(Pull);
   }
+  public void DisablePullBallsT(double DisPull){
+    PullBallsMotor.set(DisPull);
+  }
 }

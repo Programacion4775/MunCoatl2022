@@ -4,16 +4,18 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.CargoCommands.EjectIntakeCom;
-import frc.robot.commands.CargoCommands.IntakeCom;
-import frc.robot.commands.CargoCommands.PullBallsCom;
-import frc.robot.commands.CargoCommands.UpBallsAutoCom;
-import frc.robot.commands.CargoCommands.UpBallsCom;
+import frc.robot.commands.CargoCommands.CargoSensorCom;
+import frc.robot.commands.CargoCommands.IntakeCommands.EjectIntakeCom;
+import frc.robot.commands.CargoCommands.IntakeCommands.IntakeCom;
+import frc.robot.commands.CargoCommands.PullBalls.PullBallsAutoCom;
+import frc.robot.commands.CargoCommands.PullBalls.PullBallsCom;
+import frc.robot.commands.CargoCommands.ShooterCommands.ShooterComVels;
+import frc.robot.commands.CargoCommands.UpBalls.UpBallsAutoCom;
+import frc.robot.commands.CargoCommands.UpBalls.UpBallsCom;
 import frc.robot.commands.HangCom.PistonCom;
-import frc.robot.commands.HangCom.TelescopicoAutoCom;
-import frc.robot.commands.HangCom.TelescopicoCom;
-//import frc.robot.commands.ParkourCom.TelescopicoPushAutoCom;
-import frc.robot.commands.ShooterCommands.ShooterComVels;
+import frc.robot.commands.HangCom.TelescopicoCommands.TelescopicoAutoCom;
+import frc.robot.commands.HangCom.TelescopicoCommands.TelescopicoAutoZeroCom;
+import frc.robot.commands.HangCom.TelescopicoCommands.TelescopicoCom;
 import frc.robot.commands.TraccionCommands.TraccionAutoVertical;
 import frc.robot.commands.TraccionCommands.TraccionCom;
 import frc.robot.commands.TraccionCommands.TraccionLimelightCom;
@@ -21,11 +23,12 @@ import frc.robot.subsystems.Traccion;
 import frc.robot.subsystems.Cargo.EjectIntake;
 import frc.robot.subsystems.Cargo.Intake;
 import frc.robot.subsystems.Cargo.PullBalls;
+import frc.robot.subsystems.Cargo.Shooter;
 import frc.robot.subsystems.Cargo.UpBalls;
+import frc.robot.subsystems.Hang.CargoSensor;
 import frc.robot.subsystems.Hang.Piston;
 import frc.robot.subsystems.Hang.Telescopico;
 import frc.robot.subsystems.Limelight;
-import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
@@ -62,6 +65,8 @@ public class RobotContainer {
   // UpBalls//
   private final UpBalls r_UpBalls = new UpBalls();
   private final UpBallsCom r_UpBallsCom = new UpBallsCom(r_UpBalls);
+  //Sensor//
+  private final CargoSensor r_CargoSensor = new CargoSensor(); 
   // Shooter//
   public static final Shooter r_Shooter = new Shooter();
   public static final ShooterComVels r_ShooterRobotInitCom = new ShooterComVels(r_Shooter, .63);
@@ -110,34 +115,39 @@ public class RobotContainer {
     // Control 0//
     /*ButtonY_0.whenPressed(
       new SequentialCommandGroup(
-        new TelescopicoAutoCom(r_Telescopico, 10),
+        new TelescopicoAutoZeroCom(r_Telescopico),
         new TelescopicoAutoCom(r_Telescopico, -10),
         new TelescopicoAutoCom(r_Telescopico, 10),
         new PistonCom(r_Piston, true),
         new TelescopicoAutoCom(r_Telescopico, 10),
         new PistonCom(r_Piston, false),
         new TelescopicoAutoCom(r_Telescopico, -10),
-        new TelescopicoAutoCom(r_Telescopico, 10),
+        new TelescopicoAutoZeroCom(r_Telescopico),
         new TelescopicoAutoCom(r_Telescopico, -10),
         new TelescopicoAutoCom(r_Telescopico, 10),
         new PistonCom(r_Piston, true),
         new TelescopicoAutoCom(r_Telescopico, 10),
         new PistonCom(r_Piston, false),
         new TelescopicoAutoCom(r_Telescopico, -10),
-        new TelescopicoAutoCom(r_Telescopico, 10),
+        new TelescopicoAutoZeroCom(r_Telescopico),
         new TelescopicoAutoCom(r_Telescopico, -10),
         new TelescopicoAutoCom(r_Telescopico, 10),
         new PistonCom(r_Piston, true),
         new TelescopicoAutoCom(r_Telescopico, 10),
         new PistonCom(r_Piston, false),
         new TelescopicoAutoCom(r_Telescopico, -10),
-        new TelescopicoAutoCom(r_Telescopico, 10)
+        new TelescopicoAutoZeroCom(r_Telescopico)
         ));*/
     ButtonX_0.toggleWhenActive(r_TraccionLimelightCom);
     // Control 1//
-    ButtonA_1.toggleWhenActive(new UpBallsAutoCom(r_UpBalls, 1));
-    BumperR_1.whenActive(new EjectIntakeCom(r_EjectIntake, 1));
+    ButtonA_1.whenHeld(
+      new ParallelCommandGroup(
+        new PullBallsAutoCom(r_PullBalls, 1),
+        new UpBallsAutoCom(r_UpBalls, 1)));
+    //ButtonB
+    BumperR_1.whenHeld(new EjectIntakeCom(r_EjectIntake, 1));
     BumperL_1.whenHeld(new EjectIntakeCom(r_EjectIntake, -1));
+    ButtonB_1.toggleWhenActive(new CargoSensorCom(r_CargoSensor));
     // Control 2//
 
     // COMANDOS DE DEFAULT//

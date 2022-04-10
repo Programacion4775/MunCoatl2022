@@ -20,8 +20,8 @@ public class Telescopico extends SubsystemBase {
   private final CANSparkMax TelescopicoLeftBackMotor = new CANSparkMax(Constants.TelescopicoLeftBack, MotorType.kBrushless);
   private final CANSparkMax TelescopicoRightFrontMotor = new CANSparkMax(Constants.TelescopicoRightFront, MotorType.kBrushless);
   private final CANSparkMax TelescopicoLeftFrontMotor = new CANSparkMax(Constants.TelescopicoLeftFront, MotorType.kBrushless);
-  private final SparkMaxLimitSwitch TelescopicoRightLimit = TelescopicoRightFrontMotor.getReverseLimitSwitch(Type.kNormallyClosed);
-  private final SparkMaxLimitSwitch TelescopicoLeftLimit = TelescopicoLeftFrontMotor.getReverseLimitSwitch(Type.kNormallyClosed);
+  private final SparkMaxLimitSwitch TelescopicoRightLimit = TelescopicoRightFrontMotor.getReverseLimitSwitch(Type.kNormallyOpen);
+  private final SparkMaxLimitSwitch TelescopicoLeftLimit = TelescopicoLeftFrontMotor.getReverseLimitSwitch(Type.kNormallyOpen);
   private final RelativeEncoder TelescopicoRightFrontEncoder = TelescopicoRightFrontMotor.getEncoder();
   private PIDController TelescopicoPID = new PIDController(0.05, 0, 0);
 

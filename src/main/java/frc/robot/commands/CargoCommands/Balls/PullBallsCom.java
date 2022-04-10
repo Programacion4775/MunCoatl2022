@@ -1,4 +1,4 @@
-package frc.robot.commands.CargoCommands.PullBalls;
+package frc.robot.commands.CargoCommands.Balls;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;

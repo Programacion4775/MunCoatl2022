@@ -9,8 +9,16 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class CargoSensor extends SubsystemBase {
+  double[] Red, Blue, Green, Yellow; 
   private ColorSensorV3 PullBallsCargoSensor = new ColorSensorV3(Constants.PBCargoSensor);
   private ColorSensorV3 UpBallsCargoSensor = new ColorSensorV3(Constants.UBCargoSensor);
+
+  public void ColorIdentifier(final double[] r, final double[] g, final double[] b, final double[] y) {
+    Red = r;
+    Blue = b;
+    Green = g;
+    Yellow = y;
+}
 
   public CargoSensor() {}
 
@@ -20,14 +28,4 @@ public class CargoSensor extends SubsystemBase {
 
   public Color GetColorPBCargo(){
     return PullBallsCargoSensor.getColor();
-  }
-  public Color GetColorUBCargo(){
-    return UpBallsCargoSensor.getColor();
-  }
-
-  public double IRFeo(){
-    return PullBallsCargoSensor.getIR();
-  }
-
-  
-}
+  }}

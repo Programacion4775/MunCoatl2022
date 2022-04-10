@@ -30,7 +30,7 @@ public class TelescopicoAutoZeroCom extends CommandBase {
   public void execute() {
     SmartDashboard.putBoolean("LimitPressed", AuxTelescopicoAutoZero.LimitSwitchTelescopicoRight());
     TelZerPos = AuxTelescopicoAutoZero.EncoderTelescopicoR();
-    AuxTelescopicoAutoZero.VelocityTelescopico(-.5);
+    AuxTelescopicoAutoZero.VelocityTelescopico(-1);
     StopTelLim = AuxTelescopicoAutoZero.LimitSwitchTelescopicoRight();
   }
 

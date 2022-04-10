@@ -5,13 +5,13 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.CargoCommands.CargoSensorCom;
-import frc.robot.commands.CargoCommands.IntakeCommands.EjectIntakeCom;
+import frc.robot.commands.CargoCommands.Balls.PullBallsCom;
+import frc.robot.commands.CargoCommands.Balls.ShootPullBallsCom;
+import frc.robot.commands.CargoCommands.Balls.UpBallsCom;
+import frc.robot.commands.CargoCommands.IntakeCommands.EjectIntakeZeroForwardCom;
+import frc.robot.commands.CargoCommands.IntakeCommands.EjectIntakeZeroReverseCom;
 import frc.robot.commands.CargoCommands.IntakeCommands.IntakeCom;
-import frc.robot.commands.CargoCommands.PullBalls.PullBallsAutoCom;
-import frc.robot.commands.CargoCommands.PullBalls.PullBallsCom;
 import frc.robot.commands.CargoCommands.ShooterCommands.ShooterComVels;
-import frc.robot.commands.CargoCommands.UpBalls.UpBallsAutoCom;
-import frc.robot.commands.CargoCommands.UpBalls.UpBallsCom;
 import frc.robot.commands.HangCom.PistonCom;
 import frc.robot.commands.HangCom.TelescopicoCommands.TelescopicoAutoCom;
 import frc.robot.commands.HangCom.TelescopicoCommands.TelescopicoAutoZeroCom;
@@ -140,13 +140,10 @@ public class RobotContainer {
         ));*/
     ButtonX_0.toggleWhenActive(r_TraccionLimelightCom);
     // Control 1//
-    ButtonA_1.whenHeld(
-      new ParallelCommandGroup(
-        new PullBallsAutoCom(r_PullBalls, 1),
-        new UpBallsAutoCom(r_UpBalls, 1)));
-    //ButtonB
-    BumperR_1.whenHeld(new EjectIntakeCom(r_EjectIntake, 1));
-    BumperL_1.whenHeld(new EjectIntakeCom(r_EjectIntake, -1));
+    ButtonA_1.whenHeld(new ShootPullBallsCom(r_PullBalls, r_UpBalls, 1));
+    ButtonB_1.whenHeld(new )
+    BumperR_1.whenHeld(new EjectIntakeZeroForwardCom(r_EjectIntake));
+    BumperL_1.whenHeld(new EjectIntakeZeroReverseCom(r_EjectIntake));
     ButtonB_1.toggleWhenActive(new CargoSensorCom(r_CargoSensor));
     // Control 2//
 
@@ -186,7 +183,7 @@ public class RobotContainer {
           new WaitCommand(3)),
           new IntakeCom(r_Intake),
           new IntakeCom(r_Intake),
-          new UpBallsAutoCom(r_UpBalls,1),
+          new PullUpBalls(r_PullBalls, r_UpBalls, 1),
         new SequentialCommandGroup(
           new WaitCommand(6),
           new ParallelDeadlineGroup(new TraccionAutoVertical(r_Traccion, -45812*2.5, -45812*2.5),
@@ -201,6 +198,6 @@ public class RobotContainer {
         new TraccionAutoVertical(r_Traccion, -128442, -128442),
         new ShooterComVels(r_Shooter, .5)),       
         new IntakeCom(r_Intake), 
-        new UpBallsAutoCom(r_UpBalls, 1));
+        new PullUpBalls(r_PullBalls, r_UpBalls, 1));
   }
 }

@@ -42,7 +42,7 @@ public class ShootPullBallsCom extends CommandBase {
     else {
       CargoPresenceUB = false; 
     }
-    AuxShootPullBalls.PresencePBCargo(CargoPresencePB);
+    AuxShootUpBalls.PresenceUBCargo(CargoPresenceUB);
 
     if(!(CargoPresencePB && CargoPresenceUB)){
       ShootPBFlag = true;

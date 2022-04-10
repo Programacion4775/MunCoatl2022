@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.CargoCommands.CargoSensorCom;
 import frc.robot.commands.CargoCommands.Balls.PullBallsCom;
 import frc.robot.commands.CargoCommands.Balls.ShootPullBallsCom;
+import frc.robot.commands.CargoCommands.Balls.ShootUpBallsCom;
 import frc.robot.commands.CargoCommands.Balls.UpBallsCom;
 import frc.robot.commands.CargoCommands.IntakeCommands.EjectIntakeZeroForwardCom;
 import frc.robot.commands.CargoCommands.IntakeCommands.EjectIntakeZeroReverseCom;
@@ -141,7 +142,7 @@ public class RobotContainer {
     ButtonX_0.toggleWhenActive(r_TraccionLimelightCom);
     // Control 1//
     ButtonA_1.whenHeld(new ShootPullBallsCom(r_PullBalls, r_UpBalls, 1));
-    ButtonB_1.whenHeld(new )
+    ButtonB_1.whenHeld(new ShootUpBallsCom(r_UpBalls, r_PullBalls, 1, 1));
     BumperR_1.whenHeld(new EjectIntakeZeroForwardCom(r_EjectIntake));
     BumperL_1.whenHeld(new EjectIntakeZeroReverseCom(r_EjectIntake));
     ButtonB_1.toggleWhenActive(new CargoSensorCom(r_CargoSensor));

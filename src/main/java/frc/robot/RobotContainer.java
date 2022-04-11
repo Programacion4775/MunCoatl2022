@@ -19,7 +19,6 @@ import frc.robot.commands.HangCom.TelescopicoCommands.TelescopicoAutoZeroCom;
 import frc.robot.commands.HangCom.TelescopicoCommands.TelescopicoCom;
 import frc.robot.commands.TraccionCommands.TraccionAutoVertical;
 import frc.robot.commands.TraccionCommands.TraccionCom;
-import frc.robot.commands.TraccionCommands.TraccionLimelightCom;
 import frc.robot.subsystems.Traccion;
 import frc.robot.subsystems.Cargo.EjectIntake;
 import frc.robot.subsystems.Cargo.Intake;
@@ -29,7 +28,6 @@ import frc.robot.subsystems.Cargo.UpBalls;
 import frc.robot.subsystems.Hang.CargoSensor;
 import frc.robot.subsystems.Hang.Piston;
 import frc.robot.subsystems.Hang.Telescopico;
-import frc.robot.subsystems.Limelight;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
@@ -55,7 +53,6 @@ public class RobotContainer {
   // Traccion//
   private final Traccion r_Traccion = new Traccion();
   private final TraccionCom r_TraccionCom = new TraccionCom(r_Traccion);
-  private final TraccionLimelightCom r_TraccionLimelightCom = new TraccionLimelightCom (r_Traccion);
   // Intake//
   private final Intake r_Intake = new Intake();
   private final IntakeCom r_IntakeCom = new IntakeCom(r_Intake);
@@ -76,8 +73,6 @@ public class RobotContainer {
   private final TelescopicoCom r_TelescopicoCom = new TelescopicoCom(r_Telescopico);
   // Piston//
   private final Piston r_Piston = new Piston(); 
-  // Limelight//
-  public static final Limelight r_Limelight = new Limelight();
 
 // DECLARACION DE CONTROLES//
   public static final XboxController Control0 = new XboxController(0); // Control 0//
@@ -114,6 +109,21 @@ public class RobotContainer {
   // BUTTONS AND COMMANS ASIGNATION//
   // ASIGNACION DE BOTONES A COMANDOS//
     // Control 0//
+    ButtonA_0.whenPressed(
+      new SequentialCommandGroup(
+        new TelescopicoAutoZeroCom(r_Telescopico),
+        new TelescopicoAutoCom(r_Telescopico, -10),
+        new TelescopicoAutoCom(r_Telescopico, 10)));
+    ButtonB_0.whenPressed(
+      new SequentialCommandGroup(
+        new PistonCom(r_Piston, true),
+        new TelescopicoAutoCom(r_Telescopico, 10)));
+    ButtonY_0.whenPressed(
+      new SequentialCommandGroup(
+        new PistonCom(r_Piston, false),
+        new TelescopicoAutoCom(r_Telescopico, -10),
+        new TelescopicoAutoZeroCom(r_Telescopico)));
+
     /*ButtonY_0.whenPressed(
       new SequentialCommandGroup(
         new TelescopicoAutoZeroCom(r_Telescopico),
@@ -139,13 +149,13 @@ public class RobotContainer {
         new TelescopicoAutoCom(r_Telescopico, -10),
         new TelescopicoAutoZeroCom(r_Telescopico)
         ));*/
-    ButtonX_0.toggleWhenActive(r_TraccionLimelightCom);
+
     // Control 1//
     ButtonA_1.whenHeld(new ShootPullBallsCom(r_PullBalls, r_UpBalls, 1));
     ButtonB_1.whenHeld(new ShootUpBallsCom(r_UpBalls, r_PullBalls, 1, 1));
+    ButtonY_1.toggleWhenActive(new CargoSensorCom(r_CargoSensor));
     BumperR_1.whenHeld(new EjectIntakeZeroForwardCom(r_EjectIntake));
     BumperL_1.whenHeld(new EjectIntakeZeroReverseCom(r_EjectIntake));
-    ButtonB_1.toggleWhenActive(new CargoSensorCom(r_CargoSensor));
     // Control 2//
 
     // COMANDOS DE DEFAULT//
@@ -184,7 +194,7 @@ public class RobotContainer {
           new WaitCommand(3)),
           new IntakeCom(r_Intake),
           new IntakeCom(r_Intake),
-          new PullUpBalls(r_PullBalls, r_UpBalls, 1),
+         // new PullUpBalls(r_PullBalls, r_UpBalls, 1),
         new SequentialCommandGroup(
           new WaitCommand(6),
           new ParallelDeadlineGroup(new TraccionAutoVertical(r_Traccion, -45812*2.5, -45812*2.5),
@@ -198,7 +208,7 @@ public class RobotContainer {
       new ParallelRaceGroup(
         new TraccionAutoVertical(r_Traccion, -128442, -128442),
         new ShooterComVels(r_Shooter, .5)),       
-        new IntakeCom(r_Intake), 
-        new PullUpBalls(r_PullBalls, r_UpBalls, 1));
+        new IntakeCom(r_Intake)); 
+        //new PullUpBalls(r_PullBalls, r_UpBalls, 1));
   }
 }

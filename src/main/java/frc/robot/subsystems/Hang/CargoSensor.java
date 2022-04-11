@@ -3,6 +3,8 @@ package frc.robot.subsystems.Hang;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorSensorV3;
 
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -27,5 +29,9 @@ public class CargoSensor extends SubsystemBase {
   }
 
   public Color GetColorPBCargo(){
-    return PullBallsCargoSensor.getColor();
-  }}
+    return PullBallsCargoSensor.getColor(); 
+  }
+  public static DriverStation.Alliance[] alliance(){
+    return Alliance.values();
+  }
+}

@@ -4,7 +4,9 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.ColorSensorV3;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.networktables.NetworkTableType;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -24,14 +26,13 @@ public class PullBalls extends SubsystemBase {
   public void VelocityPullBalls(double Pull){
     PullBallsMotor.set(Pull);
   }
+  public static DriverStation.Alliance[] alliance(){
+    return Alliance.values();
+  }
   public Color GetColorPBCargo(){
     return PullBallsCargoSensor.getColor();
   }
-  public static DriverStation.Alliance Alliance(){
-    return DriverStation.getAlliance(); 
-  }
   public boolean PresencePBCargo(boolean PresencePBC){
     return PresencePBC;
-  }
-  
+  } 
 }

@@ -31,7 +31,4 @@ public class CargoSensor extends SubsystemBase {
   public Color GetColorPBCargo(){
     return PullBallsCargoSensor.getColor(); 
   }
-  public static DriverStation.Alliance[] alliance(){
-    return Alliance.values();
-  }
 }

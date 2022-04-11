@@ -124,7 +124,7 @@ public class RobotContainer {
         new TelescopicoAutoCom(r_Telescopico, -10),
         new TelescopicoAutoZeroCom(r_Telescopico)));
 
-    /*ButtonY_0.whenPressed(
+    /*ButtonX_0.whenPressed(
       new SequentialCommandGroup(
         new TelescopicoAutoZeroCom(r_Telescopico),
         new TelescopicoAutoCom(r_Telescopico, -10),

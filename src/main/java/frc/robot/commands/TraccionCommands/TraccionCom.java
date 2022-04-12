@@ -22,7 +22,7 @@ public class TraccionCom extends CommandBase {
 
   @Override
   public void execute() {
-    AuxTraccion.VelocityTraccion(RobotContainer.Control0.getLeftX(), -RobotContainer.Control0.getLeftY(), RobotContainer.Control0.getRightX());
+    AuxTraccion.VelocityTraccion(RobotContainer.Control0.getLeftY(), -RobotContainer.Control0.getLeftX(), RobotContainer.Control0.getRightX());
   }
 
   @Override

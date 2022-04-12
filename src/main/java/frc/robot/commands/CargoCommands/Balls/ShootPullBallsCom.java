@@ -28,23 +28,7 @@ public class ShootPullBallsCom extends CommandBase {
   public void execute() {
     AuxShootPullBalls.VelocityPullBalls(AuxShootPull);
 
-    if (AuxShootPullBalls.GetColorPBCargo().red > 100){
-      CargoPresencePB = true; 
-    }
-    else {
-      CargoPresencePB = false; 
-    }
-    AuxShootPullBalls.PresencePBCargo(CargoPresencePB);
-
-    if (AuxShootUpBalls.GetColorUBCargo().red > 100){
-      CargoPresenceUB = true; 
-    }
-    else {
-      CargoPresenceUB = false; 
-    }
-    AuxShootUpBalls.PresenceUBCargo(CargoPresenceUB);
-
-    if(!(CargoPresencePB && CargoPresenceUB)){
+    if(!(AuxShootPullBalls.GetPresencePB() && AuxShootUpBalls.GetPresenceCargoUB())== false){
       ShootPBFlag = true;
     }
     }

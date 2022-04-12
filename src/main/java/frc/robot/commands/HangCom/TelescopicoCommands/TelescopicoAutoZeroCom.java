@@ -28,10 +28,10 @@ public class TelescopicoAutoZeroCom extends CommandBase {
 
   @Override
   public void execute() {
-    SmartDashboard.putBoolean("LimitPressed", AuxTelescopicoAutoZero.LimitSwitchTelescopicoRight());
+    SmartDashboard.putBoolean("LimitPressed", AuxTelescopicoAutoZero.LimitSwitchTelescopico());
     TelZerPos = AuxTelescopicoAutoZero.EncoderTelescopicoR();
     AuxTelescopicoAutoZero.VelocityTelescopico(-1);
-    StopTelLim = AuxTelescopicoAutoZero.LimitSwitchTelescopicoRight();
+    StopTelLim = AuxTelescopicoAutoZero.LimitSwitchTelescopico();
   }
 
   @Override

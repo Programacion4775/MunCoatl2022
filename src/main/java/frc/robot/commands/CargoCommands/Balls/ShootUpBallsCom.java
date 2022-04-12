@@ -10,8 +10,6 @@ public class ShootUpBallsCom extends CommandBase {
 //Declaracion de variables//
   double AuxShootUp = 0;
   double AuxShootSPull =0; 
-  boolean CargoPresenceSPB = false; 
-  boolean CargoPresenceSUB = false; 
   private UpBalls AuxShootSUpBalls; 
   private PullBalls AuxShootSPullBalls; 
   public ShootUpBallsCom(UpBalls AShootSUpBalls, PullBalls AShootSPullBalls, double AShootUp, double AShootSPull) {
@@ -29,13 +27,11 @@ public class ShootUpBallsCom extends CommandBase {
   public void execute() {
     AuxShootSUpBalls.VelocityUpBalls(AuxShootUp);
 
-    if (AuxShootSUpBalls.GetColorUBCargo().red > 100){
-      CargoPresenceSUB = true; 
-      AuxShootSPullBalls.VelocityPullBalls(0);
+    if (AuxShootSUpBalls.GetPresenceCargoUB() == false){
+      AuxShootSPullBalls.VelocityPullBalls(AuxShootSPull);
     }
     else {
-      CargoPresenceSUB = false; 
-      AuxShootSPullBalls.VelocityPullBalls(AuxShootSPull);
+      AuxShootSPullBalls.VelocityPullBalls(0);
     }
     }
 

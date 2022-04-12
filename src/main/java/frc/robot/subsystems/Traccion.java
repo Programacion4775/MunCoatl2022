@@ -31,7 +31,7 @@ public class Traccion extends SubsystemBase {
   @Override
   public void periodic() {}
 
-  public void VelocityTraccion (double x,double y,double z){
+  public void VelocityTraccion (double y,double x,double z){
     //Ajustar el eje del control//
     if(x<=.2 && x>=-.2 && y<=.2 && y>=-.2 && z<=.2 && z>=-.2){
      TraccionFrontRightMotor.set(ControlMode.PercentOutput, 0);
@@ -40,9 +40,9 @@ public class Traccion extends SubsystemBase {
      TraccionBackLeftMotor.set(ControlMode.PercentOutput, 0);
     }
     else{
-    TraccionFrontRightMotor.set(ControlMode.PercentOutput, y+x+z);
+    TraccionFrontRightMotor.set(ControlMode.PercentOutput, y-x+z);
     TraccionFrontLeftMotor.set(ControlMode.PercentOutput, y+x-z);
-    TraccionBackRightMotor.set(ControlMode.PercentOutput, y-x+z);
+    TraccionBackRightMotor.set(ControlMode.PercentOutput, y+x+z);
     TraccionBackLeftMotor.set(ControlMode.PercentOutput, y-x-z);
    }
   }

@@ -7,28 +7,25 @@ public final class Constants {
   // ID´s MOTORS ASIGNATION//
   // ASIGNACION DE ID A MOTORES//
   // Traccion//
-  public final static int TraccionBackLeft = 31;
-  public final static int TraccionBackRight = 30;
-  public final static int TraccionFrontLeft = 33;
-  public final static int TraccionFrontRight = 32;
+  public final static int TraccionBackLeft = 1;
+  public final static int TraccionBackRight = 2;
+  public final static int TraccionFrontLeft = 3;
+  public final static int TraccionFrontRight = 4;
   // Intake//
-  public static final int Intake = 6;
-  public static final int EjectIntakeMotor = 12;
+  public static final int Intake = 5;
+  public static final int EjectIntakeMotor = 6;
   //PullBalls//
-  public static final int PullBallsM = 11; 
+  public static final int PullBallsM = 7; 
   // UpBalls//
-  public static final int UpBallsRM = 25;
-  public static final int UpBallsLM = 27; 
+  public static final int UpBallsM = 8;
   //Sensor//
-  public static final I2C.Port PBCargoSensor = I2C.Port.kOnboard;
-  public static final I2C.Port UBCargoSensor = I2C.Port.kMXP;
+  public static final int PBCargoS = 0;
+  public static final int UBCargoS = 1; 
   // Shooter//
-  public final static int Shooter = 2;
+  public final static int Shooter = 9;
   // Telescopico//
-  public final static int TelescopicoRightBack = 5;
-  public final static int TelescopicoLeftBack = 1;
-  public final static int TelescopicoRightFront = 13;
-  public final static int TelescopicoLeftFront = 7;
+  public final static int TelescopicoM = 10;
   // Pistons// 
-  public final static int PistonT = 1; 
+  public final static int PistonT = 9; 
+  public final static int PistonaT = 10;  
 }

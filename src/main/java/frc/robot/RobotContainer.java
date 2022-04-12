@@ -1,10 +1,10 @@
+
 //LIBRARIES//
 //LIBRERIAS//
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.CargoCommands.CargoSensorCom;
 import frc.robot.commands.CargoCommands.Balls.PullBallsCom;
 import frc.robot.commands.CargoCommands.Balls.ShootPullBallsCom;
 import frc.robot.commands.CargoCommands.Balls.ShootUpBallsCom;
@@ -25,7 +25,6 @@ import frc.robot.subsystems.Cargo.Intake;
 import frc.robot.subsystems.Cargo.PullBalls;
 import frc.robot.subsystems.Cargo.Shooter;
 import frc.robot.subsystems.Cargo.UpBalls;
-import frc.robot.subsystems.Hang.CargoSensor;
 import frc.robot.subsystems.Hang.Piston;
 import frc.robot.subsystems.Hang.Telescopico;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -56,7 +55,7 @@ public class RobotContainer {
   // Intake//
   private final Intake r_Intake = new Intake();
   private final IntakeCom r_IntakeCom = new IntakeCom(r_Intake);
-  private final EjectIntake r_EjectIntake = new EjectIntake();
+  //private final EjectIntake r_EjectIntake = new EjectIntake();
   //PullBalls//
   private final PullBalls r_PullBalls = new PullBalls();
   private final PullBallsCom r_PullBallsCom = new PullBallsCom(r_PullBalls);
@@ -64,7 +63,7 @@ public class RobotContainer {
   private final UpBalls r_UpBalls = new UpBalls();
   private final UpBallsCom r_UpBallsCom = new UpBallsCom(r_UpBalls);
   //Sensor//
-  private final CargoSensor r_CargoSensor = new CargoSensor(); 
+  //private final CargoSensor r_CargoSensor = new CargoSensor(); 
   // Shooter//
   public static final Shooter r_Shooter = new Shooter();
   public static final ShooterComVels r_ShooterRobotInitCom = new ShooterComVels(r_Shooter, .63);
@@ -123,7 +122,6 @@ public class RobotContainer {
         new PistonCom(r_Piston, false),
         new TelescopicoAutoCom(r_Telescopico, -10),
         new TelescopicoAutoZeroCom(r_Telescopico)));
-
     /*ButtonX_0.whenPressed(
       new SequentialCommandGroup(
         new TelescopicoAutoZeroCom(r_Telescopico),
@@ -149,13 +147,14 @@ public class RobotContainer {
         new TelescopicoAutoCom(r_Telescopico, -10),
         new TelescopicoAutoZeroCom(r_Telescopico)
         ));*/
-
+        BumperR_0.whenPressed(new PistonCom(r_Piston, true));
+        BumperL_0.whenPressed(new PistonCom(r_Piston, false));    
     // Control 1//
-    ButtonA_1.whenHeld(new ShootPullBallsCom(r_PullBalls, r_UpBalls, 1));
+   ButtonA_1.whenHeld(new ShootPullBallsCom(r_PullBalls, r_UpBalls, 1));
     ButtonB_1.whenHeld(new ShootUpBallsCom(r_UpBalls, r_PullBalls, 1, 1));
-    ButtonY_1.toggleWhenActive(new CargoSensorCom(r_CargoSensor));
-    BumperR_1.whenHeld(new EjectIntakeZeroForwardCom(r_EjectIntake));
-    BumperL_1.whenHeld(new EjectIntakeZeroReverseCom(r_EjectIntake));
+    /*BumperR_1.whenHeld(new EjectIntakeZeroForwardCom(r_EjectIntake));
+    BumperL_1.whenHeld(new EjectIntakeZeroReverseCom(r_EjectIntake));*/
+    Button7_1.toggleWhenActive(new ShooterComVels(r_Shooter, .63));
     // Control 2//
 
     // COMANDOS DE DEFAULT//

@@ -16,7 +16,7 @@ public class PullBallsCom extends CommandBase {
 
   @Override
   public void execute() {
-    AuxPullBalls.VelocityPullBalls(RobotContainer.Control1.getRightY());
+    AuxPullBalls.VelocityPullBalls(-RobotContainer.Control1.getRightY());
   }
 
   @Override

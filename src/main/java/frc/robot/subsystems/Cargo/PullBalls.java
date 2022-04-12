@@ -5,6 +5,7 @@ import com.revrobotics.ColorSensorV3;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.networktables.NetworkTableType;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.util.Color;
@@ -12,8 +13,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class PullBalls extends SubsystemBase {
-  private ColorSensorV3 PullBallsCargoSensor = new ColorSensorV3(Constants.PBCargoSensor);
   private final CANSparkMax PullBallsMotor = new CANSparkMax(Constants.PullBallsM, MotorType.kBrushless);
+  private final DigitalInput PBCargoSensor = new DigitalInput(Constants.PBCargoS);
 
   public PullBalls() {
     PullBallsMotor.setInverted(true);
@@ -29,10 +30,7 @@ public class PullBalls extends SubsystemBase {
   public static DriverStation.Alliance[] alliance(){
     return Alliance.values();
   }
-  public Color GetColorPBCargo(){
-    return PullBallsCargoSensor.getColor();
+  public boolean GetPresencePB(){
+    return !PBCargoSensor.get();
   }
-  public boolean PresencePBCargo(boolean PresencePBC){
-    return PresencePBC;
-  } 
 }

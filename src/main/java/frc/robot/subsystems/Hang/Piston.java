@@ -11,6 +11,7 @@ public class Piston extends SubsystemBase {
   //Actuators declaration//
   //Declaracion de actuadores//
   public static Solenoid Piston = new Solenoid(PneumaticsModuleType.REVPH, Constants.PistonT);
+  public static Solenoid Pistona = new Solenoid(PneumaticsModuleType.REVPH, Constants.PistonaT);
 
   public Piston() {}
 
@@ -20,6 +21,7 @@ public class Piston extends SubsystemBase {
 
   public boolean OpenClosePiston(boolean OpClPiston){
     Piston.set(OpClPiston);
+    Pistona.set(!OpClPiston);
     return OpClPiston; 
   }
 }

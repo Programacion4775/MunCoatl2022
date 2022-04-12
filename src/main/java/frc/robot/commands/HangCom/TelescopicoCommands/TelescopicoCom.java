@@ -25,8 +25,8 @@ public class TelescopicoCom extends CommandBase {
     //Dashboard Data//
    //Valores en la Dashboard//
     SmartDashboard.putNumber("Encoder Telescopico", AuxTelescopico.EncoderTelescopicoR()); //Encoder//
-    SmartDashboard.putBoolean("TelescopicoPressed", AuxTelescopico.LimitSwitchTelescopicoRight()); //Limit Switch//
-    AuxTelescopico.VelocityTelescopico(RobotContainer.Control0.getRightTriggerAxis()*0.5-RobotContainer.Control0.getLeftTriggerAxis());
+    SmartDashboard.putBoolean("TelescopicoPressed", AuxTelescopico.LimitSwitchTelescopico()); //Limit Switch//
+    AuxTelescopico.VelocityTelescopico(RobotContainer.Control0.getRightTriggerAxis()-RobotContainer.Control0.getLeftTriggerAxis());
   }
 
   @Override

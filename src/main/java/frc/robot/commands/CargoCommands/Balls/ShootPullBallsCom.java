@@ -1,5 +1,6 @@
 package frc.robot.commands.CargoCommands.Balls;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Cargo.PullBalls;
 import frc.robot.subsystems.Cargo.UpBalls;
@@ -22,13 +23,16 @@ public class ShootPullBallsCom extends CommandBase {
   }
 
   @Override
-  public void initialize() {}
+  public void initialize() {
+    ShootPBFlag = false; 
+  }
 
   @Override
   public void execute() {
     AuxShootPullBalls.VelocityPullBalls(AuxShootPull);
 
-    if(!(AuxShootPullBalls.GetPresencePB() && AuxShootUpBalls.GetPresenceCargoUB())== false){
+
+    if((AuxShootPullBalls.GetPresencePB() && AuxShootUpBalls.GetPresenceCargoUB())){
       ShootPBFlag = true;
     }
     }

@@ -54,29 +54,28 @@ public class RobotContainer {
   private final TraccionCom r_TraccionCom = new TraccionCom(r_Traccion);
   // Intake//
   private final Intake r_Intake = new Intake();
-  private final IntakeCom r_IntakeCom = new IntakeCom(r_Intake);
-  //private final EjectIntake r_EjectIntake = new EjectIntake();
+  private final EjectIntake r_EjectIntake = new EjectIntake();
+  private final IntakeCom r_IntakeEject = new IntakeCom(r_Intake, r_EjectIntake);
   //PullBalls//
   private final PullBalls r_PullBalls = new PullBalls();
   private final PullBallsCom r_PullBallsCom = new PullBallsCom(r_PullBalls);
   // UpBalls//
   private final UpBalls r_UpBalls = new UpBalls();
   private final UpBallsCom r_UpBallsCom = new UpBallsCom(r_UpBalls);
-  //Sensor//
-  //private final CargoSensor r_CargoSensor = new CargoSensor(); 
   // Shooter//
   public static final Shooter r_Shooter = new Shooter();
   public static final ShooterComVels r_ShooterRobotInitCom = new ShooterComVels(r_Shooter, .63);
   // Telescopico//
   private final Telescopico r_Telescopico = new Telescopico();
   private final TelescopicoCom r_TelescopicoCom = new TelescopicoCom(r_Telescopico);
-  // Piston//
-  private final Piston r_Piston = new Piston(); 
+  public static Piston r_Piston = new Piston(); 
+  public static PistonCom r_PistonRobotInit = new PistonCom(r_Piston, true);
 
 // DECLARACION DE CONTROLES//
   public static final XboxController Control0 = new XboxController(0); // Control 0//
   public static final XboxController Control1 = new XboxController(1); // Control 1//
-  public static final XboxController Control2 = new XboxController(2); // Control 2//
+  public static final GenericHID Control2 = new GenericHID(2); // Control 2//
+  public static final XboxController Control3 = new XboxController(3);
 
 // DECLARACION DE BOTONES//
   // Control 0//
@@ -147,20 +146,24 @@ public class RobotContainer {
         new TelescopicoAutoCom(r_Telescopico, -10),
         new TelescopicoAutoZeroCom(r_Telescopico)
         ));*/
-        BumperR_0.whenPressed(new PistonCom(r_Piston, true));
-        BumperL_0.whenPressed(new PistonCom(r_Piston, false));    
+    ButtonX_0.whenPressed(new TelescopicoAutoZeroCom(r_Telescopico));
+    BumperR_0.whenHeld(new PistonCom(r_Piston, true));
+    BumperL_0.whenReleased(new PistonCom(r_Piston, false));    
     // Control 1//
-   ButtonA_1.whenHeld(new ShootPullBallsCom(r_PullBalls, r_UpBalls, 1));
     ButtonB_1.whenHeld(new ShootUpBallsCom(r_UpBalls, r_PullBalls, 1, 1));
-    /*BumperR_1.whenHeld(new EjectIntakeZeroForwardCom(r_EjectIntake));
-    BumperL_1.whenHeld(new EjectIntakeZeroReverseCom(r_EjectIntake));*/
-    Button7_1.toggleWhenActive(new ShooterComVels(r_Shooter, .63));
+    BumperR_1.whenPressed(new EjectIntakeZeroForwardCom(r_EjectIntake));
+    BumperR_1.whenReleased(new EjectIntakeZeroReverseCom(r_EjectIntake));
+    BumperR_1.whenReleased(new ShootPullBallsCom(r_PullBalls, r_UpBalls, 1));
+    BumperL_1.whenPressed(new EjectIntakeZeroForwardCom(r_EjectIntake));
+    BumperL_1.whenReleased(new EjectIntakeZeroReverseCom(r_EjectIntake));
+    BumperL_1.whenReleased(new ShootPullBallsCom(r_PullBalls, r_UpBalls, 1));
+    Button7_1.toggleWhenActive(new ShooterComVels(r_Shooter, .3));
     // Control 2//
 
     // COMANDOS DE DEFAULT//
     // DEFEAULT COMMANDS//
     r_Traccion.setDefaultCommand(r_TraccionCom);
-    r_Intake.setDefaultCommand(r_IntakeCom);
+    r_Intake.setDefaultCommand(r_IntakeEject);
     r_PullBalls.setDefaultCommand(r_PullBallsCom);
     r_UpBalls.setDefaultCommand(r_UpBallsCom);
     r_Telescopico.setDefaultCommand(r_TelescopicoCom);
@@ -191,23 +194,18 @@ public class RobotContainer {
         new ShooterComVels(r_Shooter, .63),
         new SequentialCommandGroup(
           new WaitCommand(3)),
-          new IntakeCom(r_Intake),
-          new IntakeCom(r_Intake),
-         // new PullUpBalls(r_PullBalls, r_UpBalls, 1),
-        new SequentialCommandGroup(
+          new ShootPullBallsCom(r_PullBalls, r_UpBalls, 1),
           new WaitCommand(6),
-          new ParallelDeadlineGroup(new TraccionAutoVertical(r_Traccion, -45812*2.5, -45812*2.5),
-          new WaitCommand(1)
-          )));
+          new TraccionAutoVertical(r_Traccion, -45812*2.5, -45812*2.5));
   }
 
-  public Command TopRed3C() {
+ /* public Command TopRed3C() {
     return
     new SequentialCommandGroup(
       new ParallelRaceGroup(
         new TraccionAutoVertical(r_Traccion, -128442, -128442),
         new ShooterComVels(r_Shooter, .5)),       
         new IntakeCom(r_Intake)); 
-        //new PullUpBalls(r_PullBalls, r_UpBalls, 1));
-  }
+        new PullUpBalls(r_PullBalls, r_UpBalls, 1));
+  }*/
 }

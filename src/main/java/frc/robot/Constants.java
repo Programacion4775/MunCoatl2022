@@ -18,9 +18,11 @@ public final class Constants {
   public static final int PullBallsM = 7; 
   // UpBalls//
   public static final int UpBallsM = 8;
-  //Sensor//
-  public static final int PBCargoS = 0;
-  public static final int UBCargoS = 1; 
+  //PresenceSensor//
+  public static final int PBCargoS = 1;
+  public static final int UBCargoS = 0; 
+  //ColorSensor//
+  public static final I2C.Port ShootingSensor = I2C.Port.kOnboard; 
   // Shooter//
   public final static int Shooter = 9;
   // Telescopico//

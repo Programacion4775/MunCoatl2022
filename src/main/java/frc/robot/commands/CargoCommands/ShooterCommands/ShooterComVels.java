@@ -2,6 +2,7 @@ package frc.robot.commands.CargoCommands.ShooterCommands;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Robot;
 import frc.robot.subsystems.Cargo.Shooter;
 
 public class ShooterComVels extends CommandBase {
@@ -31,6 +32,8 @@ public class ShooterComVels extends CommandBase {
 
   @Override
   public void execute() {
+    SmartDashboard.putNumber("azulval", AuxShooter.GetColor().blue);
+    SmartDashboard.putData("Current alliance", Robot.AllianceCh);
     SmartDashboard.putBoolean("ShooterAct", true);
     SmartDashboard.putNumber("encoder shoot", AuxShooter.VelocityEncoderShooter());
     AuxShooter.VelocityShooter(VelsShooter);

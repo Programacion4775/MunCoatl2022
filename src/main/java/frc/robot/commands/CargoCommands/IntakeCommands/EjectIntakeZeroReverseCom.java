@@ -22,13 +22,14 @@ public class EjectIntakeZeroReverseCom extends CommandBase {
 
   @Override
   public void initialize() {
+    StopEjInLimR = false;
     AuxEjectIntakeZeroR.ResetEncoderEjectInatke();
   }
 
   @Override
   public void execute() {
     SmartDashboard.putBoolean("LimitPressed", AuxEjectIntakeZeroR.LimitSwitchEjectIntakeReverse());
-    AuxEjectIntakeZeroR.EjectReturnIntake(-1);
+    AuxEjectIntakeZeroR.EjectReturnIntake(-.25);
     StopEjInLimR = AuxEjectIntakeZeroR.LimitSwitchEjectIntakeReverse();
   }
 

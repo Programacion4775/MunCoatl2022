@@ -27,9 +27,6 @@ public class PullBalls extends SubsystemBase {
   public void VelocityPullBalls(double Pull){
     PullBallsMotor.set(Pull);
   }
-  public static DriverStation.Alliance[] alliance(){
-    return Alliance.values();
-  }
   public boolean GetPresencePB(){
     return !PBCargoSensor.get();
   }

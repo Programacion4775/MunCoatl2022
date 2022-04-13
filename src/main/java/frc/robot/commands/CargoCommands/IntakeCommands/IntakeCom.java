@@ -1,7 +1,9 @@
 package frc.robot.commands.CargoCommands.IntakeCommands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
+import frc.robot.subsystems.Cargo.EjectIntake;
 import frc.robot.subsystems.Cargo.Intake;
 
 public class IntakeCom extends CommandBase {
@@ -9,10 +11,12 @@ public class IntakeCom extends CommandBase {
 //Link command with subsistem//
 //Unir comando con el subsitema//
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private Intake AuxIntakeFront;
-  public IntakeCom(Intake AIntakeFront) {
-  AuxIntakeFront = AIntakeFront;
-  addRequirements(AuxIntakeFront);
+  private Intake AuxIntake;
+  private EjectIntake AuxEjectIntakeIntake; 
+  public IntakeCom(Intake AIntake, EjectIntake AEjectIntakeIntake) {
+  AuxIntake = AIntake;
+  AuxEjectIntakeIntake = AEjectIntakeIntake;
+  addRequirements(AuxIntake);
   }
 
   @Override
@@ -20,12 +24,16 @@ public class IntakeCom extends CommandBase {
 
   @Override
   public void execute() {
-    AuxIntakeFront.VelocityIntakeFront(RobotContainer.Control1.getRightTriggerAxis()-RobotContainer.Control1.getLeftTriggerAxis());
+    AuxIntake.VelocityIntakeFront(.7);
+    SmartDashboard.putBoolean("Intake", true);
+    if(AuxEjectIntakeIntake.LimitSwitchEjectIntakeReverse()){
+      AuxIntake.VelocityIntakeFront(0);
+    }
   }
 
   @Override
   public void end(boolean interrupted) {
-    AuxIntakeFront.VelocityIntakeFront(0);
+    AuxIntake.VelocityIntakeFront(0);
   }
 
   @Override

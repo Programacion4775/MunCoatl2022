@@ -26,14 +26,13 @@ public class ShootUpBallsCom extends CommandBase {
   @Override
   public void execute() {
     AuxShootSUpBalls.VelocityUpBalls(AuxShootUp);
+    AuxShootSPullBalls.VelocityPullBalls(AuxShootSPull);
 
-    if (AuxShootSUpBalls.GetPresenceCargoUB() == false){
-      AuxShootSPullBalls.VelocityPullBalls(AuxShootSPull);
-    }
-    else {
+
+    if (AuxShootSUpBalls.GetPresenceCargoUB()){
       AuxShootSPullBalls.VelocityPullBalls(0);
     }
-    }
+  }
 
 
 

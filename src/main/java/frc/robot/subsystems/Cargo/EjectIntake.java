@@ -12,8 +12,8 @@ import frc.robot.Constants;
 public class EjectIntake extends SubsystemBase {
   private final CANSparkMax EjectIntakeMotor = new CANSparkMax(Constants.EjectIntakeMotor, MotorType.kBrushless);
   private RelativeEncoder EjectIntakeEncoder = EjectIntakeMotor.getEncoder();
-  private SparkMaxLimitSwitch EjectIntakeLimitSwitchF = EjectIntakeMotor.getForwardLimitSwitch(Type.kNormallyOpen);
-  private SparkMaxLimitSwitch EjectIntakeLimitSwitchR = EjectIntakeMotor.getReverseLimitSwitch(Type.kNormallyOpen);
+  private SparkMaxLimitSwitch EjectIntakeLimitSwitchF = EjectIntakeMotor.getForwardLimitSwitch(Type.kNormallyClosed);
+  private SparkMaxLimitSwitch EjectIntakeLimitSwitchR = EjectIntakeMotor.getReverseLimitSwitch(Type.kNormallyClosed);
 
   public EjectIntake() {}
 

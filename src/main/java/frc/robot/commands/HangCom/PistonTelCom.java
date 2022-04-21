@@ -1,9 +1,9 @@
 package frc.robot.commands.HangCom;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Hang.Piston;
+import frc.robot.subsystems.Hang.PistonTel;
 
-public class PistonCom extends CommandBase {
+public class PistonTelCom extends CommandBase {
   
   //Variables declaration//
   //Declaracion de variables//
@@ -11,8 +11,8 @@ public class PistonCom extends CommandBase {
 
   //Link command with subsistem//
   //Unir comando con el subsitema//
-  private final Piston AuxPiston; 
-  public PistonCom(Piston APiston, Boolean APistonOC) {
+  private final PistonTel AuxPiston; 
+  public PistonTelCom(PistonTel APiston, Boolean APistonOC) {
     AuxPiston = APiston;
     PistonOC = APistonOC;
     addRequirements(AuxPiston);
@@ -20,7 +20,7 @@ public class PistonCom extends CommandBase {
 
   @Override
   public void initialize() {
-    AuxPiston.OpenClosePiston(PistonOC);
+    AuxPiston.OpenClosePistonTel(PistonOC);
   }
 
   @Override

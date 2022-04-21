@@ -1,5 +1,6 @@
 package frc.robot.commands.CargoCommands.Balls;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Cargo.PullBalls;
 import frc.robot.subsystems.Cargo.UpBalls;
@@ -25,6 +26,7 @@ public class ShootUpBallsCom extends CommandBase {
 
   @Override
   public void execute() {
+    SmartDashboard.putBoolean("Verde", true);
     AuxShootSUpBalls.VelocityUpBalls(AuxShootUp);
     AuxShootSPullBalls.VelocityPullBalls(AuxShootSPull);
 
@@ -38,6 +40,7 @@ public class ShootUpBallsCom extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
+    SmartDashboard.putBoolean("Verde", true);
     AuxShootSPullBalls.VelocityPullBalls(0);
     AuxShootSUpBalls.VelocityUpBalls(0);
   }

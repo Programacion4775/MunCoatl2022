@@ -28,7 +28,6 @@ public class EjectIntakeZeroReverseCom extends CommandBase {
 
   @Override
   public void execute() {
-    SmartDashboard.putBoolean("LimitPressed", AuxEjectIntakeZeroR.LimitSwitchEjectIntakeReverse());
     AuxEjectIntakeZeroR.EjectReturnIntake(-.25);
     StopEjInLimR = AuxEjectIntakeZeroR.LimitSwitchEjectIntakeReverse();
   }

@@ -29,17 +29,17 @@ public class ShootPullBallsCom extends CommandBase {
 
   @Override
   public void execute() {
+    SmartDashboard.putBoolean("Bandas", true);
     AuxShootPullBalls.VelocityPullBalls(AuxShootPull);
-
-
     if((AuxShootPullBalls.GetPresencePB() && AuxShootUpBalls.GetPresenceCargoUB())){
       ShootPBFlag = true;
     }
     }
 
-
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    SmartDashboard.putBoolean("Bandas", false);
+  }
 
   @Override
   public boolean isFinished() {

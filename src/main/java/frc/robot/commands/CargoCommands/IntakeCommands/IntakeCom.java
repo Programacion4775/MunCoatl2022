@@ -24,8 +24,9 @@ public class IntakeCom extends CommandBase {
 
   @Override
   public void execute() {
-    AuxIntake.VelocityIntakeFront(.7);
     SmartDashboard.putBoolean("Intake", true);
+    SmartDashboard.putBoolean("LimitPressed", AuxEjectIntakeIntake.LimitSwitchEjectIntakeReverse());
+    AuxIntake.VelocityIntakeFront(.7);
     if(AuxEjectIntakeIntake.LimitSwitchEjectIntakeReverse()){
       AuxIntake.VelocityIntakeFront(0);
     }

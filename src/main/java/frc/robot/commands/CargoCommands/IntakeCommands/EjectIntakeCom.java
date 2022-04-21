@@ -1,5 +1,6 @@
 package frc.robot.commands.CargoCommands.IntakeCommands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Cargo.EjectIntake;
@@ -19,6 +20,10 @@ public class EjectIntakeCom extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    SmartDashboard.putNumber("INtake", AuxEjectIntake.EncoderEjectIntake());
+    if (AuxEjectIntake.LimitSwitchEjectIntakeReverse()){
+    AuxEjectIntake.ResetEncoderEjectInatke();
+    }
     AuxEjectIntake.EjectReturnIntake(RobotContainer.Control3.getRightY());
   }
 

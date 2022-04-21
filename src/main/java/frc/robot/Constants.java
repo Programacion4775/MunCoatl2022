@@ -14,6 +14,7 @@ public final class Constants {
   // Intake//
   public static final int Intake = 5;
   public static final int EjectIntakeMotor = 6;
+  public static final int EjectIntakeDigital = 2; 
   //PullBalls//
   public static final int PullBallsM = 7; 
   // UpBalls//
@@ -26,8 +27,9 @@ public final class Constants {
   // Shooter//
   public final static int Shooter = 9;
   // Telescopico//
-  public final static int TelescopicoM = 10;
-  // Pistons// 
-  public final static int PistonT = 9; 
-  public final static int PistonaT = 10;  
+  public final static int TelescopicoM = 10; 
+  public final static int PistonT = 8; 
+  //Hooks//
+  public final static int PistonHR = 9;
+  public final static int PistonHL = 10;
 }

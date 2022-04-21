@@ -3,67 +3,67 @@ package frc.robot.commands.TraccionCommands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Traccion;
 
-public class TraccionAutoHorizontal extends CommandBase {
+public class TraccionAuto extends CommandBase {
 
   double SetPointHorizontalRightTraccion = 0;
   double SetPointHorizontalLeftTraccion = 0; 
   double PositionFrontRightH = 0;
   double PositionFrontLeftH = 0; 
-  double lPIDOuth = 0;
-  double rPIDOuth = 0;
+  double LOut = 0;
+  double ROut = 0;
+  boolean VerHorTra; 
   boolean FlagHorizontalTraccion = false;
 
 //Link command with subsistem//
 //Unir comando con el subsitema//
 @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-private Traccion AuxTraccionAutoHorizontal;
-  public TraccionAutoHorizontal(Traccion ATraccionAutoHorizontal, double ASetPointHorizontalRightTraccion, double ASetPointHorizontalLeftTraccion) {
-    AuxTraccionAutoHorizontal = ATraccionAutoHorizontal;
+private Traccion AuxTraccionAuto;
+  public TraccionAuto(Traccion ATraccionAuto, boolean AVerHorTra, double ASetPointHorizontalRightTraccion, double ASetPointHorizontalLeftTraccion) {
+    AuxTraccionAuto = ATraccionAuto;
+    VerHorTra = AVerHorTra; 
     SetPointHorizontalRightTraccion = ASetPointHorizontalRightTraccion;
     SetPointHorizontalLeftTraccion = ASetPointHorizontalLeftTraccion;
-    addRequirements(AuxTraccionAutoHorizontal);
+    addRequirements(AuxTraccionAuto);
   }
   
   @Override
   public void initialize() {
-    lPIDOuth = 0;
-    rPIDOuth = 0;
     PositionFrontRightH = 0;
     PositionFrontLeftH = 0; 
+    LOut = 0;
+    ROut = 0;
     FlagHorizontalTraccion = false;
-    //AuxTraccionAutoVertical.PIDResetFrontRightTraccion();
-    //AuxTraccionAutoVertical.PIDResetFrontLeftTraccion();
   }
 
   @Override
   public void execute() {
-    /*SmartDashboard.putNumber("derecha", rPIDOut);
-    SmartDashboard.putNumber("izquierda", lPIDOut);
-    SmartDashboard.putNumber("encoderdere", PositionFrontRightV);
-    SmartDashboard.putNumber("encodeizq", PositionFrontLeftV);
-    SmartDashboard.putBoolean("flagtraccion", FlagVerticalTraccion);*/
-    PositionFrontRightH = AuxTraccionAutoHorizontal.EncoderRightBackTraccion();
+    PositionFrontRightH = AuxTraccionAuto.EncoderRightBackTraccion();
     if (Math.abs(SetPointHorizontalRightTraccion) - Math.abs(PositionFrontRightH) <= 5 && (Math.abs(SetPointHorizontalRightTraccion) - Math.abs(PositionFrontLeftH) <= 5)){
       FlagHorizontalTraccion = true;
       } 
         if (SetPointHorizontalLeftTraccion>0) {
-            lPIDOuth = .25;
+          LOut = .25;
         }
         if(SetPointHorizontalLeftTraccion<0){        
-          lPIDOuth= -.25;
+          LOut= -.25;
         }
         if(SetPointHorizontalRightTraccion<0){        
-          rPIDOuth = -.25;
+          ROut = -.25;
         }
         if(SetPointHorizontalRightTraccion>0){        
-          rPIDOuth = .25;
+          ROut = .25;
         }
-        AuxTraccionAutoHorizontal.diferentialVel(rPIDOuth, lPIDOuth);
+        if (VerHorTra == true){
+          AuxTraccionAuto.diferentialVel(ROut, LOut);
+        }
+        else if (VerHorTra == false){
+          AuxTraccionAuto.LateralVelocity(ROut, LOut);
+        }
   }
 
   @Override
   public void end(boolean interrupted) {
-    AuxTraccionAutoHorizontal.diferentialVel(0, 0);
+    AuxTraccionAuto.diferentialVel(0, 0);
   }
 
   // Returns true when the command should end.

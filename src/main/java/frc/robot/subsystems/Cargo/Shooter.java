@@ -42,7 +42,7 @@ public class Shooter extends SubsystemBase {
   }
   /*public static double RedAlliance(){
     double Red = .63;  
-    if((GetColor().blue>50) && (GetColor().blue>60)){
+    if((GetColor().red>50) && (GetColor().red>60)){
       Red = .3; 
     }
       ShooterMotor.set(Red);
@@ -55,5 +55,23 @@ public class Shooter extends SubsystemBase {
     }
     ShooterMotor.set(Blue);
     return Blue;
+  }
+
+  public double AllianceVals (boolean alli){
+    double Power = .63;
+    if (alli) {
+      //blue 
+      if((GetColor().red>50) && (GetColor().red>60)){
+        Power = .3; 
+      }
+    } 
+    else {
+      //red
+      if((GetColor().blue>50) && (GetColor().blue>60)){
+        Power = .3; 
+      }
+    }
+    ShooterMotor.set(Power);
+    return Power;
   }*/
 }

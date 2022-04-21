@@ -6,14 +6,14 @@ import com.revrobotics.SparkMaxLimitSwitch;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.SparkMaxLimitSwitch.Type;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class EjectIntake extends SubsystemBase {
   private final CANSparkMax EjectIntakeMotor = new CANSparkMax(Constants.EjectIntakeMotor, MotorType.kBrushless);
   private RelativeEncoder EjectIntakeEncoder = EjectIntakeMotor.getEncoder();
-  private SparkMaxLimitSwitch EjectIntakeLimitSwitchF = EjectIntakeMotor.getForwardLimitSwitch(Type.kNormallyClosed);
-  private SparkMaxLimitSwitch EjectIntakeLimitSwitchR = EjectIntakeMotor.getReverseLimitSwitch(Type.kNormallyClosed);
+  private DigitalInput EjectIntakeLimitSwitchR = new DigitalInput(Constants.EjectIntakeDigital);
 
   public EjectIntake() {}
 
@@ -31,10 +31,14 @@ public class EjectIntake extends SubsystemBase {
     EjectIntakeEncoder.setPosition(0);
   }
     //Limit Switch//
-    public boolean LimitSwitchEjectIntakeForward(){
-      return EjectIntakeLimitSwitchF.isPressed();
+    public boolean LimitSwitchEjectIntakeForward(double LimitFPosition){
+      boolean LimitFPressed = false;
+      if(Math.abs(EncoderEjectIntake()-42) <= 5){
+        LimitFPressed = true; 
+      }
+      return LimitFPressed;
     }
     public boolean LimitSwitchEjectIntakeReverse(){
-      return EjectIntakeLimitSwitchR.isPressed();
+      return !EjectIntakeLimitSwitchR.get();
     }
 }

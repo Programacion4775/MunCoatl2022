@@ -28,13 +28,17 @@ public class EjectIntakeZeroForwardCom extends CommandBase {
 
   @Override
   public void execute() {
-    SmartDashboard.putBoolean("LimitPressed", AuxEjectIntakeZero.LimitSwitchEjectIntakeForward());
+    SmartDashboard.putBoolean("Intake", true);
+    SmartDashboard.putBoolean("LimitPressed", AuxEjectIntakeZero.LimitSwitchEjectIntakeForward(100));
     AuxEjectIntakeZero.EjectReturnIntake(.25);
-    StopEjInLim = AuxEjectIntakeZero.LimitSwitchEjectIntakeForward();
+    if(Math.abs(42-AuxEjectIntakeZero.EncoderEjectIntake()) <= 3){
+      StopEjInLim = true;
+    }
   }
 
   @Override
   public void end(boolean interrupted) {
+    SmartDashboard.putBoolean("Intake", false);
     AuxEjectIntakeZero.EjectReturnIntake(0);
   }
 

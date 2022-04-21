@@ -32,12 +32,15 @@ public class ShooterComVels extends CommandBase {
 
   @Override
   public void execute() {
-    SmartDashboard.putNumber("azulval", AuxShooter.GetColor().blue);
-    SmartDashboard.putData("Current alliance", Robot.AllianceCh);
     SmartDashboard.putBoolean("ShooterAct", true);
     SmartDashboard.putNumber("encoder shoot", AuxShooter.VelocityEncoderShooter());
+   // SmartDashboard.putBoolean("alli", Robot.AllianceB);
+    SmartDashboard.putNumber("vel", VelsShooter);
+    //VelsShooter = AuxShooter.AllianceVals(Robot.AllianceB);
     AuxShooter.VelocityShooter(VelsShooter);
     VelocityShooter = AuxShooter.VelocityEncoderShooter();
+    /*VelsShooter = Shooter.BlueAlliance(); 
+    VelsShooter = Shooter.RedAlliance(); */
     /*PIDOutShooter = AuxShooter.PIDCalculateOutputShooter(VelocityShooter, VelsShooter);
     if (Math.abs(VelsShooter - VelocityShooter ) <= 15){
       FlagShooter = true;

@@ -24,12 +24,13 @@ import frc.robot.subsystems.Cargo.Shooter;
  * project.
  */
 public class Robot extends TimedRobot {
+  public static boolean AllianceB = true;
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
   public Compressor Compresora; 
   public UsbCamera USBCamera = new UsbCamera("Camera", 1);
-  public static SendableChooser AllianceCh = new SendableChooser<>(); 
-  static double [] val = new double[2];
+  /*public static SendableChooser AllianceCh = new SendableChooser<>(); 
+  static double [] val = new double[2];*/
 
 
   /**
@@ -61,8 +62,11 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
+    /*SmartDashboard.putNumber("azulval", Shooter.GetColor().blue);
+    SmartDashboard.putNumber("ROJVAL", Shooter.GetColor().red);
+   /* AllianceB = SmartDashboard.getBoolean("¿Somos azules?", false);
     Compresora.enableDigital();  
-   /* AllianceCh.setDefaultOption("BlueAlliance", Shooter.RedAlliance());
+    AllianceCh.setDefaultOption("BlueAlliance", Shooter.RedAlliance());
     AllianceCh.addOption("RedAlliance", Shooter.BlueAlliance());*/
     }
 

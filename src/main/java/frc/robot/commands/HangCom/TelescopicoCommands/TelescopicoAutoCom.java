@@ -1,5 +1,6 @@
 package frc.robot.commands.HangCom.TelescopicoCommands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Hang.Telescopico;
 
@@ -31,6 +32,9 @@ public class TelescopicoAutoCom extends CommandBase {
 
   @Override
   public void execute() {
+    SmartDashboard.putBoolean("ActivTel", true);
+    SmartDashboard.putNumber("TelOut", OutPutTelescopico);
+    SmartDashboard.putNumber("EncodeTeA", AuxTelescopicoAuto.EncoderTelescopicoR());
     PositionTelescopico = AuxTelescopicoAuto.EncoderTelescopicoR(); //Get Telescopico Current Position////Obtener la posición actual del Telescopico//
     OutPutTelescopico = AuxTelescopicoAuto.PIDCalculateOutPutTelescopico(PositionTelescopico, SetPointTelescopico); //Calculate PID TelescopicoOutput//Clacular la salida PID del Telescopico//
     AuxTelescopicoAuto.VelocityTelescopico(OutPutTelescopico); //Give that output to the motors//Darle esa salida al telescopico//
@@ -42,6 +46,7 @@ public class TelescopicoAutoCom extends CommandBase {
   
   @Override
   public void end(boolean interrupted) {
+    SmartDashboard.putBoolean("ActivTel", false);
     AuxTelescopicoAuto.PIDResetTelescopico();
   }
 

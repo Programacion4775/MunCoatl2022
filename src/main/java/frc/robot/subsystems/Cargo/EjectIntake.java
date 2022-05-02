@@ -1,4 +1,4 @@
-package frc.robot.subsystems.Cargo;
+/*package frc.robot.subsystems.Cargo;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
@@ -41,4 +41,4 @@ public class EjectIntake extends SubsystemBase {
     public boolean LimitSwitchEjectIntakeReverse(){
       return !EjectIntakeLimitSwitchR.get();
     }
-}
+}*/

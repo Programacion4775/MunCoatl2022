@@ -19,7 +19,7 @@ public class Telescopico extends SubsystemBase {
   private final CANSparkMax TelescopicoMotor = new CANSparkMax(Constants.TelescopicoM, MotorType.kBrushless);
   private final SparkMaxLimitSwitch TelescopicoLimit = TelescopicoMotor.getReverseLimitSwitch(Type.kNormallyOpen);
   private final RelativeEncoder TelescopicoEncoder = TelescopicoMotor.getEncoder();
-  private PIDController TelescopicoPID = new PIDController(0.05, 0, 0);
+  private PIDController TelescopicoPID = new PIDController(0.005, 0, 0);
 
   public Telescopico() {}
 
@@ -62,7 +62,7 @@ public class Telescopico extends SubsystemBase {
   //Calculate PID OutPut//
   //Calcular la salida del PID//
   public double PIDCalculateOutPutTelescopico (double PIDCurrentPositionTelescopico, double PIDSetPoint){
-    double PIDOutPutTelescopico = PIDCalculateOutPutTelescopico(PIDCurrentPositionTelescopico, PIDSetPoint);
-    return PIDOutPutTelescopico;
+    return TelescopicoPID.calculate(PIDCurrentPositionTelescopico, PIDSetPoint);
+    //return PIDOutPutTelescopico;
   }
 }

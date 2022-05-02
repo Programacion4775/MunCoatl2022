@@ -27,10 +27,10 @@ public class Robot extends TimedRobot {
   public static boolean AllianceB = true;
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
-  public Compressor Compresora; 
+  //public Compressor Compresora; 
   public UsbCamera USBCamera = new UsbCamera("Camera", 1);
-  /*public static SendableChooser AllianceCh = new SendableChooser<>(); 
-  static double [] val = new double[2];*/
+  public static SendableChooser AllianceCh = new SendableChooser<>(); 
+  static double [] val = new double[2];
 
 
   /**
@@ -42,7 +42,7 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    Compresora = new Compressor(PneumaticsModuleType.REVPH); 
+    //Compresora = new Compressor(PneumaticsModuleType.REVPH); 
     USBCamera.setFPS(60);
     USBCamera.setResolution(160, 120);
     USBCamera = CameraServer.startAutomaticCapture();
@@ -68,6 +68,7 @@ public class Robot extends TimedRobot {
     Compresora.enableDigital();  
     AllianceCh.setDefaultOption("BlueAlliance", Shooter.RedAlliance());
     AllianceCh.addOption("RedAlliance", Shooter.BlueAlliance());*/
+    
     }
 
   /** This function is called once each time the robot enters Disabled mode. */
@@ -101,8 +102,8 @@ public class Robot extends TimedRobot {
     // this line or comment it out.
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
-      RobotContainer.r_ShooterRobotInitCom.schedule();
       RobotContainer.r_PistonRobotInit.schedule();
+      RobotContainer.r_ShooterRobotInitCom.schedule();
     }
   }
 

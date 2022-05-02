@@ -27,6 +27,8 @@ public class ShootUpBallsCom extends CommandBase {
   @Override
   public void execute() {
     SmartDashboard.putBoolean("Verde", true);
+    SmartDashboard.putBoolean("presence", AuxShootSUpBalls.GetPresenceCargoUB());
+    SmartDashboard.putBoolean("presencep", AuxShootSPullBalls.GetPresencePB());
     AuxShootSUpBalls.VelocityUpBalls(AuxShootUp);
     AuxShootSPullBalls.VelocityPullBalls(AuxShootSPull);
 
@@ -40,7 +42,7 @@ public class ShootUpBallsCom extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    SmartDashboard.putBoolean("Verde", true);
+    SmartDashboard.putBoolean("Verde", false);
     AuxShootSPullBalls.VelocityPullBalls(0);
     AuxShootSUpBalls.VelocityUpBalls(0);
   }

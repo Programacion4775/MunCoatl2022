@@ -13,7 +13,7 @@ public final class Constants {
   public final static int TraccionFrontRight = 4;
   // Intake//
   public static final int Intake = 5;
-  public static final int EjectIntakeMotor = 6;
+  //public static final int EjectIntakeMotor = 6;
   public static final int EjectIntakeDigital = 2; 
   //PullBalls//
   public static final int PullBallsM = 7; 

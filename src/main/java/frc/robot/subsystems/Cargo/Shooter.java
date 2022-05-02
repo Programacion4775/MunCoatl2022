@@ -40,7 +40,7 @@ public class Shooter extends SubsystemBase {
   public static Color GetColor(){
     return ChangeShooting.getColor();
   }
-  /*public static double RedAlliance(){
+  public static double RedAlliance(){
     double Red = .63;  
     if((GetColor().red>50) && (GetColor().red>60)){
       Red = .3; 
@@ -57,7 +57,7 @@ public class Shooter extends SubsystemBase {
     return Blue;
   }
 
-  public double AllianceVals (boolean alli){
+  /*public double AllianceVals (boolean alli){
     double Power = .63;
     if (alli) {
       //blue 

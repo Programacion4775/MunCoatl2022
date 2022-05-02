@@ -37,10 +37,12 @@ public class TelescopicoAutoZeroCom extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     AuxTelescopicoAutoZero.ResetEncoderTelescopicoR();
+
   }
 
   @Override
   public boolean isFinished() {
+    AuxTelescopicoAutoZero.VelocityTelescopico(0);
     return StopTelLim;
   }
 }
